@@ -86,188 +86,239 @@ función getHeroes (): Promesa <Héroe []> {
 Es una mejor práctica redistribuir el componente y sus clases de soporte en sus propios archivos dedicados.
 
 main.ts
+```
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
 app / app.module.ts
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
+import { AppComponent } from './app.component';
+import { HeroesComponent } from './heroes/heroes.component';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+  ],
+  declarations: [
+    AppComponent,
+    HeroesComponent
+  ],
+  exports: [ AppComponent ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule { }
+```
+
 app / app.component.ts
+```
+import { Component } from '@angular/core';
+
+import { HeroService } from './heroes';
+
+@Component({
+  selector: 'toh-app',
+  template: `
+      <toh-heroes></toh-heroes>
+    `,
+  styleUrls: ['./app.component.css'],
+  providers: [HeroService]
+})
+export class AppComponent {}
+```
 app / heroes / heroes.component.ts
-app / heroes / shared / hero.service.ts
-app / heroes / shared / hero.model.ts
-app / heroes / shared / mock-heroes.ts
-content_copy
-importar {Inyectable} desde '@ angular / core';
+```
+import { Component, OnInit } from '@angular/core';
 
-importar {HEROES} desde './mock-heroes';
+import { Hero, HeroService } from './shared';
 
-@Inyectable ()
-export class HeroService {
-  getHeroes () {
-    return Promise.resolve (HÉROES);
-  }
+@Component({
+  selector: 'toh-heroes',
+  template: `
+      <pre>{{heroes | json}}</pre>
+    `
+})
+export class HeroesComponent implements OnInit {
+  heroes: Hero[] = [];
+
+  constructor(private heroService: HeroService) {}
+
+  ngOnInit() {
+    this.heroService.getHeroes()
+      .then(heroes => this.heroes = heroes);
+  }
 }
+```
 
+app / heroes / shared / hero.service.ts
+```
+import { Injectable } from '@angular/core';
 
+import { HEROES } from './mock-heroes';
 
-A medida que la aplicación crece, esta regla se vuelve aún más importante. Volver arriba
+@Injectable()
+export class HeroService {
+  getHeroes() {
+    return Promise.resolve(HEROES);
+  }
+}
+```
 
-Funciones pequeñas
-Estilo 01-02
+app / heroes / shared / hero.model.ts
+```
+export class Hero {
+  id: number;
+  name: string;
+}
+```
+
+app / heroes / shared / mock-heroes.ts
+```
+import { Hero } from './hero.model';
+
+export const HEROES: Hero[] = [
+  { id: 1, name: 'Bombasto' },
+  { id: 2, name: 'Tornado' },
+  { id: 3, name: 'Magneta' }
+];
+```
+
+A medida que la aplicación crece, esta regla se vuelve aún más importante.
+
+#Funciones pequeñas
+##Estilo 01-02
 Definir funciones pequeñas
 
 Considere limitar a no más de 75 líneas.
 
-¿Por qué? Las funciones pequeñas son más fáciles de probar, especialmente cuando hacen una cosa y tienen un propósito.
+**¿Por qué?** Las funciones pequeñas son más fáciles de probar, especialmente cuando hacen una cosa y tienen un propósito.
 
-¿Por qué? Pequeñas funciones promueven la reutilización.
+**¿Por qué?** Pequeñas funciones promueven la reutilización.
 
-¿Por qué? Las funciones pequeñas son más fáciles de leer.
+**¿Por qué?** Las funciones pequeñas son más fáciles de leer.
 
-¿Por qué? Las funciones pequeñas son más fáciles de mantener.
+**¿Por qué?** Las funciones pequeñas son más fáciles de mantener.
 
-¿Por qué? Las funciones pequeñas ayudan a evitar errores ocultos que vienen con funciones grandes que comparten variables con un alcance externo, crean cierres no deseados o acoplamiento no deseado con dependencias.
+**¿Por qué?** Las funciones pequeñas ayudan a evitar errores ocultos que vienen con funciones grandes que comparten variables con un alcance externo, crean cierres no deseados o acoplamiento no deseado con dependencias.
 
-Volver arriba
 
-Nombrar
+#Nombrar
 Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la legibilidad. Esta guía recomienda convenciones de nomenclatura para el nombre del archivo y el nombre del símbolo.
 
-Pautas generales de nomenclatura
-Estilo 02-01
-Utilice nombres consistentes para todos los símbolos.
+#Pautas generales de nomenclatura
+##Estilo 02-01
 
-Siga un patrón que describa la característica del símbolo y luego su tipo. El patrón recomendado es feature.type.ts.
+**Do** Utilice nombres consistentes para todos los elementos.
+**Do** Siga un patrón que describa la característica del elemento y luego su tipo. El patrón recomendado es feature.type.ts.
 
-¿Por qué? Las convenciones de nomenclatura ayudan a proporcionar una forma coherente de buscar contenido de un vistazo. Consistencia dentro del profesional
+**¿Por qué?** Las convenciones de nomenclatura ayudan a proporcionar una forma coherente de buscar contenido de un vistazo. 
 
-El objeto es vital. La consistencia con un equipo es importante. La consistencia en una empresa proporciona una eficiencia tremenda.
+**¿Por qué?** Las convenciones de nomenclatura ayudan a proporcionar una forma coherente de buscar contenido de un vistazo. La consistencia dentro del proyecto es vital. La consistencia con un equipo es importante. La consistencia en una empresa proporciona una eficiencia tremenda.
 
-¿Por qué? Las convenciones de nomenclatura simplemente deberían ayudar a encontrar el código deseado más rápido y facilitar su comprensión.
+**¿Por qué?** Las convenciones de nomenclatura simplemente deberían ayudar a encontrar el código deseado más rápido y facilitar su comprensión.
 
-¿Por qué? Los nombres de carpetas y archivos deben transmitir claramente su intención. Por ejemplo, app / heroes / hero-list.component.ts puede contener un componente que gestiona una lista de héroes.
+**¿Por qué?** Los nombres de carpetas y archivos deben transmitir claramente su intención. Por ejemplo, app / heroes / hero-list.component.ts puede contener un componente que gestiona una lista de héroes.
 
-Volver arriba
+#Separe los nombres de archivo con puntos y guiones
+##Estilo 02-02
 
-Separe los nombres de archivo con puntos y guiones
-Estilo 02-02
-Utilice guiones para separar palabras en el nombre descriptivo.
+**Do** Utilice guiones para separar palabras en el nombre descriptivo.
 
-Utilice puntos para separar el nombre descriptivo del tipo.
+**Do** Utilice puntos para separar el nombre descriptivo del tipo.
 
-Utilice nombres de tipo coherentes para todos los componentes siguiendo un patrón que describa la característica del componente y luego su tipo. Un patrón recomendado es feature.type.ts.
+**Do** Utilice nombres de tipo coherentes para todos los componentes siguiendo un patrón que describa la característica del componente y luego su tipo. Un patrón recomendado es feature.type.ts.
 
-Utilice nombres de tipo convencionales, incluidos .service, .component, .pipe, .module y .directive. Si es necesario, invente nombres de tipos adicionales, pero tenga cuidado de no crear demasiados.
+**Do** Utilice nombres de tipo convencionales, incluidos .service, .component, .pipe, .module y .directive. Si es necesario, invente nombres de tipos adicionales, pero tenga cuidado de no crear demasiados.
 
-¿Por qué? Los nombres de tipo proporcionan una forma coherente de identificar rápidamente lo que hay en el archivo.
+**¿Por qué?** Los nombres de tipo proporcionan una forma coherente de identificar rápidamente lo que hay en el archivo.
 
-¿Por qué? Los nombres de tipo facilitan la búsqueda de un tipo de archivo específico utilizando un editor o las técnicas de búsqueda difusa de IDE.
+**¿Por qué?** Los nombres de tipo facilitan la búsqueda de un tipo de archivo específico utilizando un editor o las técnicas de búsqueda difusa de IDE.
 
-¿Por qué? Los nombres de tipo no abreviados como .service son descriptivos y no ambiguos. Las abreviaturas como .srv, .svc y .serv pueden ser confusas.
+**¿Por qué?** Los nombres de tipo no abreviados como .service son descriptivos y no ambiguos. Las abreviaturas como .srv, .svc y .serv pueden ser confusas.
 
-¿Por qué? Los nombres de tipo proporcionan coincidencia de patrones para cualquier tarea automatizada.
+**¿Por qué?** Los nombres de tipo proporcionan coincidencia de patrones para cualquier tarea automatizada.
 
-Volver arriba
+#Elementos y nombres de archivos
+##Estilo 02-03
 
-Símbolos y nombres de archivos
-Estilo 02-03
-Utilice nombres consistentes para todos los activos nombrados después de lo que representan.
+**Do** Utilice nombres consistentes para todos los activos nombrados después de lo que representan.
 
-Utilice mayúsculas de camello para los nombres de clase.
+**Do** Utilice upper camel case para los nombres de clase.
 
-Haga coincidir el nombre del símbolo con el nombre del archivo.
+**Do** Haga coincidir el nombre del Elemento con el nombre del archivo.
 
-Agregue el nombre del símbolo con el sufijo convencional (como Componente, Directiva, Módulo, Tubería o Servicio) para algo de ese tipo.
+**Do** Agregue el nombre del elemento con el sufijo convencional (como Componente, Directiva, Módulo, Tubería o Servicio) para algo de ese tipo.
 
-Proporcione al nombre de archivo el sufijo convencional (como .component.ts, .directive.ts, .module.ts, .pipe.ts o .service.ts) para un archivo de ese tipo.
+**Do** Proporcione al nombre de archivo el sufijo convencional (como .component.ts, .directive.ts, .module.ts, .pipe.ts o .service.ts) para un archivo de ese tipo.
 
-¿Por qué? Las convenciones consistentes facilitan la identificación y referencia rápida de activos de diferentes tipos.
+**¿Por qué?** Las convenciones consistentes facilitan la identificación y referencia rápida de activos de diferentes tipos.
 
-Nombre del símbolo Nombre del archivo
-content_copy
-@Componente({ ... })
-clase de exportación AppComponent {}
-app.component.ts
 
-content_copy
-@Componente({ ... })
-export class HeroesComponent {}
-heroes.component.ts
+| Nombre de Elemento     | Nombre del archivo |
+| ------------- |:-------------:|
+|```@Componente({ ... })
+clase de exportación AppComponent {}```| ```app.component.ts``` |
+| ``` @Componente({ ... })
+export class HeroesComponent {} ```     | ``` heroes.component.ts ```   |
+| ``` @Componente({ ... })
+export class HeroListComponent {} ``` | ``` hero-list.component.ts ``` |
+|``` @Componente({ ... })
+export class HeroDetailComponent {} ``` | ``` hero-detail.component.ts ```|
+| ``` @Directive ({...})
+export class ValidationDirective {} ```| ``` validation.directive.ts ``` |
+| ``` @NgModule ({...})
+clase de exportación AppModule ```| ``` app.module.ts ```|
+|``` @Pipe ({nombre: 'initCaps'})
+la clase de exportación InitCapsPipe implementa PipeTransform {} ```| ``` init-caps.pipe.ts ``` |
+|``` @Inyectable ()
+clase de exportación UserProfileService {} ``` | ``` user-profile.service.ts ``` |
 
-content_copy
-@Componente({ ... })
-export class HeroListComponent {}
-hero-list.component.ts
+#Nombres de servicio
+##Estilo 02-04
+**Do** Utilice nombres consistentes para todos los servicios nombrados después de su función.
 
-content_copy
-@Componente({ ... })
-export class HeroDetailComponent {}
-hero-detail.component.ts
-
-content_copy
-@Directive ({...})
-export class ValidationDirective {}
-validation.directive.ts
-
-content_copy
-@NgModule ({...})
-clase de exportación AppModule
-app.module.ts
-
-content_copy
-@Pipe ({nombre: 'initCaps'})
-la clase de exportación InitCapsPipe implementa PipeTransform {}
-init-caps.pipe.ts
-
-content_copy
-@Inyectable ()
-clase de exportación UserProfileService {}
-user-profile.service.ts
-
-Volver arriba
-
-Nombres de servicio
-Estilo 02-04
-Utilice nombres consistentes para todos los servicios nombrados después de su función.
-
-Sufije un nombre de clase de servicio con Servicio. Por ejemplo, algo que obtiene datos o héroes debería llamarse DataService o HeroService.
+**Do** Sufije un nombre de clase de servicio con Servicio. Por ejemplo, algo que obtiene datos o héroes debería llamarse DataService o HeroService.
 
 Algunos términos son servicios inequívocos. Normalmente indican agencia terminando en "-er". Es posible que prefiera nombrar un servicio que registre los mensajes Logger en lugar de LoggerService. Decide si esta excepción es aceptable en tu proyecto. Como siempre, luche por la consistencia.
 
-¿Por qué? Proporciona una manera consistente de identificar y referenciar servicios rápidamente.
+**¿Por qué?** Proporciona una manera consistente de identificar y referenciar servicios rápidamente.
 
-¿Por qué? Los nombres de servicio claros como Logger no requieren un sufijo.
+**¿Por qué?** Los nombres de servicio claros como Logger no requieren un sufijo.
 
-¿Por qué? Los nombres de servicios como Crédito son sustantivos y requieren un sufijo, y deben nombrarse con un sufijo cuando no es obvio si se trata de un servicio u otra cosa.
+**¿Por qué?** Los nombres de servicios como Crédito son sustantivos y requieren un sufijo, y deben nombrarse con un sufijo cuando no es obvio si se trata de un servicio u otra cosa.
 
-Nombre del símbolo Nombre del archivo
-content_copy
-@Inyectable ()
-export class HeroDataService {}
-hero-data.service.ts
 
-content_copy
-@Inyectable ()
-clase de exportación CreditService {}
-credit.service.ts
+| Nombre de Elemento     | Nombre del archivo |
+| ------------- |:-------------:|
+|``` @Inyectable ()
+export class HeroDataService {} ```| ```hero-data.service.ts``` |
+| ``` @Inyectable ()
+clase de exportación CreditService {} ``` | ``` credit.service.ts ```   |
+| ``` @Inyectable ()
+Exportar registrador de clase {} ``` | ``` logger.service.ts ``` |
 
-content_copy
-@Inyectable ()
-Exportar registrador de clase {}
-logger.service.ts
 
-Volver arriba
+#Bootstrapping
+##Estilo 02-05
 
-Bootstrapping
-Estilo 02-05
-Ponga bootstrapping y lógica de plataforma para la aplicación en un archivo llamado main.ts.
+**Do** Ponga bootstrapping y lógica de plataforma para la aplicación en un archivo llamado main.ts.
 
-Incluya el manejo de errores en la lógica de arranque.
+**Do** Incluya el manejo de errores en la lógica de arranque.
 
-Evite poner la lógica de la aplicación en main.ts. En cambio, considere colocarlo en un componente o servicio.
+**Do** Evite poner la lógica de la aplicación en main.ts. En cambio, considere colocarlo en un componente o servicio.
 
-¿Por qué? Sigue una convención consistente para la lógica de inicio de una aplicación.
+**¿Por qué?** Sigue una convención consistente para la lógica de inicio de una aplicación.
 
-¿Por qué? Sigue una convención familiar de otras plataformas tecnológicas.
+**¿Por qué?** Sigue una convención familiar de otras plataformas tecnológicas.
 
 main.ts
-content_copy
+```
 importar {platformBrowserDynamic} desde '@ angular / platform-browser-dynamic';
 
 importar {AppModule} desde './app/app.module';
@@ -275,172 +326,172 @@ importar {AppModule} desde './app/app.module';
 platformBrowserDynamic (). bootstrapModule (AppModule)
   .then (success => console.log (`Bootstrap success`))
   .catch (err => console.error (err));
-Volver arriba
+```
 
-Selectores de componentes
-Estilo 05-02
-Use el caso de guiones o el caso de kebab para nombrar los selectores de elementos de los componentes.
+#Selectores de componentes
+##Estilo 05-02
 
-¿Por qué? Mantiene los nombres de los elementos consistentes con la especificación de los Elementos personalizados.
+**Do** Use dashed-case or kebab-case para nombrar los selectores de elementos de los componentes.
+
+**¿Por qué?** Mantiene los nombres de los elementos consistentes con la especificación de los Elementos personalizados.
 
 app / heroes / shared / hero-button / hero-button.component.ts
-content_copy
-/ * evitar * /
-
+> / * evitar * /
+```
 @Componente({
   selector: 'tohHeroButton',
   templateUrl: './hero-button.component.html'
 })
 export class HeroButtonComponent {}
+```
+> Ejemplo Positivo
 app / heroes / shared / hero-button / hero-button.component.ts
-app / app.component.html
-content_copy
-@Componente({
-  selector: 'toh-hero
-  -botón',
-  templateUrl: './hero-button.component.html'
+```
+@Component({
+  selector: 'toh-hero-button',
+  templateUrl: './hero-button.component.html'
 })
 export class HeroButtonComponent {}
-Volver arriba
 
-Prefijo personalizado de componente
-Estilo 02-07
-Utilice un valor de selector de elemento en minúsculas con guión; por ejemplo, usuarios administrativos.
+```
 
-Utilice un prefijo personalizado para un selector de componentes. Por ejemplo, el prefijo toh representa Tour of Heroes y el prefijo admin representa un área de funciones de administrador.
+app / app.component.html
+```
+<toh-hero-button></toh-hero-button>
+```
 
-Utilice un prefijo que identifique el área de características o la aplicación en sí.
 
-¿Por qué? Evita las colisiones de nombres de elementos con componentes en otras aplicaciones y con elementos HTML nativos.
+#Prefijo personalizado de componente
+##Estilo 02-07
 
-¿Por qué? Facilita la promoción y el uso compartido del componente en otras aplicaciones.
+**Do** Utilice un valor de selector de elemento en minúsculas con guión; por ejemplo, *admin-users* .
 
-¿Por qué? Los componentes son fáciles de identificar en el DOM.
+**Do** Utilice un prefijo personalizado para un selector de componentes. Por ejemplo, el prefijo toh representa Tour of Heroes y el prefijo admin representa un área de funciones de administrador.
+
+**Do** Utilice un prefijo que identifique el área de características o la aplicación en sí.
+
+**¿Por qué?** Evita las colisiones de nombres de elementos con componentes en otras aplicaciones y con elementos HTML nativos.
+
+**¿Por qué?** Facilita la promoción y el uso compartido del componente en otras aplicaciones.
+
+**¿Por qué?** Los componentes son fáciles de identificar en el DOM.
 
 app / heroes / hero.component.ts
-content_copy
-/ * evitar * /
-
+> / * evitar * /
+```
 // HeroComponent está en la función Tour of Heroes
 @Componente({
   selector: 'héroe'
 })
 export class HeroComponent {}
+```
 app / users / users.component.ts
-content_copy
-/ * evitar * /
-
+> / * evitar * /
+```
 // UsersComponent está en una función de administrador
 @Componente({
   selector: 'usuarios'
 })
 clase de exportación UsersComponent {}
+```
 app / heroes / hero.component.ts
-content_copy
+```
 @Componente({
   selector: 'toh-hero'
 })
 export class HeroComponent {}
+```
 app / users / users.component.ts
-content_copy
+```
 @Componente({
   selector: 'admin-users'
 })
 clase de exportación UsersComponent {}
-Volver arriba
+```
+#Selectores de directivas
+##Estilo 02-06
 
-Selectores de directivas
-Estilo 02-06
-Utilice minúsculas de camello para nombrar los selectores de directivas.
+**Do** Utilice minúsculas de camello para nombrar los selectores de directivas.
 
-¿Por qué? Mantiene los nombres de las propiedades definidas en las directivas vinculadas a la vista coherentes con los nombres de los atributos.
+**¿Por qué?** Mantiene los nombres de las propiedades definidas en las directivas vinculadas a la vista coherentes con los nombres de los atributos.
 
-¿Por qué? El analizador HTML angular distingue entre mayúsculas y minúsculas y reconoce las minúsculas de camello.
+**¿Por qué?** El analizador HTML angular distingue entre mayúsculas y minúsculas y reconoce las minúsculas de camello.
 
-Volver arriba
 
-Prefijo personalizado de directiva
-Estilo 02-08
-Utilice un prefijo personalizado para el selector de directivas (por ejemplo, el prefijo toh de Tour of Heroes).
+#Prefijo personalizado de directiva
+##Estilo 02-08
 
-Deletree selectores que no sean elementos en minúsculas camello a menos que el selector esté destinado a coincidir con un atributo HTML nativo.
+**Do** Utilice un prefijo personalizado para el selector de directivas (por ejemplo, el prefijo toh de Tour of Heroes).
 
-¿Por qué? Previene colisiones de nombres.
+**Do** Deletree selectores que no sean elementos en  lower camel case a menos que el selector esté destinado a coincidir con un atributo HTML nativo.
 
-¿Por qué? Las directivas se identifican fácilmente.
+**¿Por qué?** Previene colisiones de nombres.
+
+**¿Por qué?** Las directivas se identifican fácilmente.
 
 app / shared / validate.directive.ts
-content_copy
-/ * evitar * /
-
+> / * evitar * /
+```
 @Directiva({
   selector: '[validar]'
 })
 clase de exportación ValidateDirective {}
+```
 app / shared / validate.directive.ts
-content_copy
+```
 @Directiva({
   selector: '[tohValidate]'
 })
 clase de exportación ValidateDirective {}
-Volver arriba
+```
+#Nombres de los pipe
+##Estilo 02-09
 
-Nombres de tuberías
-Estilo 02-09
-Utilice nombres consistentes para todas las tuberías, nombrados por su característica. El nombre de la clase de tubería debe usar UpperCamelCase (la convención general para los nombres de clase), y la cadena de nombre correspondiente debe usar lowerCamelCase. La cadena de nombre no puede usar guiones ("guión-caso" o "kebab-caso").
+**Do** Utilice nombres consistentes para todas los pipe, nombrados por su característica. El nombre de la clase pipe debe usar UpperCamelCase (la convención general para los nombres de clase), y la cadena de nombre correspondiente debe usar lowerCamelCase. La cadena de nombre no puede usar guiones ("dash-case" or "kebab-case").
 
-¿Por qué? Proporciona una forma consistente de identificar y hacer referencia rápidamente a las tuberías.
+**¿Por qué?** Proporciona una forma consistente de identificar y hacer referencia rápidamente a las tuberías.
 
-Nombre del símbolo Nombre del archivo
-content_copy
-@Pipe ({nombre: 'puntos suspensivos'})
-export class EllipsisPipe implementa PipeTransform {}
-ellipsis.pipe.ts
+| Nombre de Elemento     | Nombre del archivo |
+| ------------- |:-------------:|
+|``` @Pipe ({nombre: 'puntos suspensivos'})
+export class EllipsisPipe implementa PipeTransform {} ```| ```ellipsis.pipe.ts``` |
+| ``` @Pipe ({nombre: 'initCaps'})
+la clase de exportación InitCapsPipe implementa PipeTransform {} ``` | ``` init-caps.pipe.ts ```   |
 
-content_copy
-@Pipe ({nombre: 'initCaps'})
-la clase de exportación InitCapsPipe implementa PipeTransform {}
-init-caps.pipe.ts
+#Nombres de archivo de prueba unitaria
+##Estilo 02-10
 
-Volver arriba
+**Do** Nombre los archivos de especificación de prueba igual que el componente que prueban.
 
-Nombres de archivo de prueba de unidad
-Estilo 02-10
-Nombre los archivos de especificación de prueba igual que el componente que prueban.
+**Do** Nombre los archivos de especificación de prueba con un sufijo de .spec.
 
-Nombre los archivos de especificación de prueba con un sufijo de .spec.
+**¿Por qué?** Proporciona una forma consistente de identificar rápidamente las pruebas.
 
-¿Por qué? Proporciona una forma consistente de identificar rápidamente las pruebas.
+**¿Por qué?** Proporciona coincidencia de patrones para karma u otros corredores de prueba.
 
-¿Por qué? Proporciona coincidencia de patrones para karma u otros corredores de prueba.
-
-Nombre de archivo de tipo de prueba
-Componentes
-
-heroes.component.spec.ts
+| Tipo de prueba | Nombre del archivo |
+| ------------- |:-------------:|
+| Componentes | heroes.component.spec.ts
 
 hero-list.component.spec.ts
 
-hero-detail.component.spec.ts
+hero-detail.component.spec.ts |
 
-Servicios
-
-logger.service.spec.ts
+|Servicios| logger.service.spec.ts
 
 hero.service.spec.ts
 
-filter-text.service.spec.ts
+filter-text.service.spec.ts  |
 
-Tubería
 
-ellipsis.pipe.spec.ts
+|Pipes| ellipsis.pipe.spec.ts
 
-init-caps.pipe.spec.ts
+init-caps.pipe.spec.ts |
 
-Volver arriba
 
-Nombres de archivo de prueba de extremo a extremo (E2E)
-Estilo 02-11
+#Nombres de archivo de prueba de extremo a extremo (E2E)
+#Estilo 02-11
+
 Nombre los archivos de especificación de prueba de extremo a extremo después de la característica que prueban con un sufijo .e2e-spec.
 
 ¿Por qué? Proporciona una forma consistente de identificar rápidamente las pruebas de extremo a extremo.
