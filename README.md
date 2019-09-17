@@ -18,8 +18,8 @@ La redacción de cada directriz indica cuán fuerte es la recomendación.
 **Responsabilidad única**
 Aplique el principio de responsabilidad única (SRP) a todos los componentes, servicios y otros símbolos. Esto ayuda a que la aplicación sea más limpia, más fácil de leer y mantener, y más comprobable.
 
-#Regla de uno
-##Estilo 01-01
+# Regla de uno
+## Estilo 01-01
 Defina una cosa, como un servicio o componente, por archivo.
 Considere limitar los archivos a 400 líneas de código.
 
@@ -191,8 +191,8 @@ export const HEROES: Hero[] = [
 
 A medida que la aplicación crece, esta regla se vuelve aún más importante.
 
-#Funciones pequeñas
-##Estilo 01-02
+# Funciones pequeñas
+## Estilo 01-02
 Definir funciones pequeñas
 
 Considere limitar a no más de 75 líneas.
@@ -208,11 +208,11 @@ Considere limitar a no más de 75 líneas.
 **¿Por qué?** Las funciones pequeñas ayudan a evitar errores ocultos que vienen con funciones grandes que comparten variables con un alcance externo, crean cierres no deseados o acoplamiento no deseado con dependencias.
 
 
-#Nombrar
+# Nombrar
 Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la legibilidad. Esta guía recomienda convenciones de nomenclatura para el nombre del archivo y el nombre del símbolo.
 
-#Pautas generales de nomenclatura
-##Estilo 02-01
+# Pautas generales de nomenclatura
+## Estilo 02-01
 
 **Do** Utilice nombres consistentes para todos los elementos.
 **Do** Siga un patrón que describa la característica del elemento y luego su tipo. El patrón recomendado es feature.type.ts.
@@ -225,8 +225,8 @@ Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la
 
 **¿Por qué?** Los nombres de carpetas y archivos deben transmitir claramente su intención. Por ejemplo, app / heroes / hero-list.component.ts puede contener un componente que gestiona una lista de héroes.
 
-#Separe los nombres de archivo con puntos y guiones
-##Estilo 02-02
+# Separe los nombres de archivo con puntos y guiones
+## Estilo 02-02
 
 **Do** Utilice guiones para separar palabras en el nombre descriptivo.
 
@@ -244,8 +244,8 @@ Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la
 
 **¿Por qué?** Los nombres de tipo proporcionan coincidencia de patrones para cualquier tarea automatizada.
 
-#Elementos y nombres de archivos
-##Estilo 02-03
+# Elementos y nombres de archivos
+## Estilo 02-03
 
 **Do** Utilice nombres consistentes para todos los activos nombrados después de lo que representan.
 
@@ -262,25 +262,17 @@ Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la
 
 | Nombre de Elemento     | Nombre del archivo |
 | ------------- |:-------------:|
-|```@Componente({ ... })
-clase de exportación AppComponent {}```| ```app.component.ts``` |
-| ``` @Componente({ ... })
-export class HeroesComponent {} ```     | ``` heroes.component.ts ```   |
-| ``` @Componente({ ... })
-export class HeroListComponent {} ``` | ``` hero-list.component.ts ``` |
-|``` @Componente({ ... })
-export class HeroDetailComponent {} ``` | ``` hero-detail.component.ts ```|
-| ``` @Directive ({...})
-export class ValidationDirective {} ```| ``` validation.directive.ts ``` |
-| ``` @NgModule ({...})
-clase de exportación AppModule ```| ``` app.module.ts ```|
-|``` @Pipe ({nombre: 'initCaps'})
-la clase de exportación InitCapsPipe implementa PipeTransform {} ```| ``` init-caps.pipe.ts ``` |
-|``` @Inyectable ()
-clase de exportación UserProfileService {} ``` | ``` user-profile.service.ts ``` |
+| ```export class AppComponent {}``` | ```app.component.ts``` |
+|```export class HeroesComponent {}``` | ``` heroes.component.ts ```   |
+| ``` export class HeroListComponent {} ``` | ``` hero-list.component.ts ``` |
+|``` export class HeroDetailComponent {} ``` | ``` hero-detail.component.ts ```|
+| ``` export class ValidationDirective {} ```| ``` validation.directive.ts ``` |
+| ``` export class AppModule ```| ``` app.module.ts ```|
+|``` export class InitCapsPipe implementa PipeTransform {} ```| ``` init-caps.pipe.ts ``` |
+|``` export class UserProfileService {} ``` | ``` user-profile.service.ts ``` |
 
-#Nombres de servicio
-##Estilo 02-04
+# Nombres de servicio
+## Estilo 02-04
 **Do** Utilice nombres consistentes para todos los servicios nombrados después de su función.
 
 **Do** Sufije un nombre de clase de servicio con Servicio. Por ejemplo, algo que obtiene datos o héroes debería llamarse DataService o HeroService.
@@ -296,16 +288,13 @@ Algunos términos son servicios inequívocos. Normalmente indican agencia termin
 
 | Nombre de Elemento     | Nombre del archivo |
 | ------------- |:-------------:|
-|``` @Inyectable ()
-export class HeroDataService {} ```| ```hero-data.service.ts``` |
-| ``` @Inyectable ()
-clase de exportación CreditService {} ``` | ``` credit.service.ts ```   |
-| ``` @Inyectable ()
-Exportar registrador de clase {} ``` | ``` logger.service.ts ``` |
+|``` export class HeroDataService {} ```| ```hero-data.service.ts``` |
+| ```export class  CreditService {} ``` | ``` credit.service.ts ```   |
+| ```export class Logger { }``` | ``` logger.service.ts ``` |
 
 
-#Bootstrapping
-##Estilo 02-05
+# Bootstrapping
+## Estilo 02-05
 
 **Do** Ponga bootstrapping y lógica de plataforma para la aplicación en un archivo llamado main.ts.
 
@@ -328,15 +317,16 @@ platformBrowserDynamic (). bootstrapModule (AppModule)
   .catch (err => console.error (err));
 ```
 
-#Selectores de componentes
-##Estilo 05-02
+# Selectores de componentes
+## Estilo 05-02
 
 **Do** Use dashed-case or kebab-case para nombrar los selectores de elementos de los componentes.
 
 **¿Por qué?** Mantiene los nombres de los elementos consistentes con la especificación de los Elementos personalizados.
 
 app / heroes / shared / hero-button / hero-button.component.ts
-> / * evitar * /
+
+> *evitar*
 ```
 @Componente({
   selector: 'tohHeroButton',
@@ -345,7 +335,9 @@ app / heroes / shared / hero-button / hero-button.component.ts
 export class HeroButtonComponent {}
 ```
 > Ejemplo Positivo
+
 app / heroes / shared / hero-button / hero-button.component.ts
+
 ```
 @Component({
   selector: 'toh-hero-button',
@@ -361,8 +353,8 @@ app / app.component.html
 ```
 
 
-#Prefijo personalizado de componente
-##Estilo 02-07
+# Prefijo personalizado de componente
+## Estilo 02-07
 
 **Do** Utilice un valor de selector de elemento en minúsculas con guión; por ejemplo, *admin-users* .
 
@@ -377,7 +369,8 @@ app / app.component.html
 **¿Por qué?** Los componentes son fáciles de identificar en el DOM.
 
 app / heroes / hero.component.ts
-> / * evitar * /
+
+> *evitar*
 ```
 // HeroComponent está en la función Tour of Heroes
 @Componente({
@@ -386,7 +379,8 @@ app / heroes / hero.component.ts
 export class HeroComponent {}
 ```
 app / users / users.component.ts
-> / * evitar * /
+
+> *evitar*
 ```
 // UsersComponent está en una función de administrador
 @Componente({
@@ -408,8 +402,8 @@ app / users / users.component.ts
 })
 clase de exportación UsersComponent {}
 ```
-#Selectores de directivas
-##Estilo 02-06
+# Selectores de directivas
+## Estilo 02-06
 
 **Do** Utilice minúsculas de camello para nombrar los selectores de directivas.
 
@@ -417,9 +411,8 @@ clase de exportación UsersComponent {}
 
 **¿Por qué?** El analizador HTML angular distingue entre mayúsculas y minúsculas y reconoce las minúsculas de camello.
 
-
-#Prefijo personalizado de directiva
-##Estilo 02-08
+# Prefijo personalizado de directiva
+## Estilo 02-08
 
 **Do** Utilice un prefijo personalizado para el selector de directivas (por ejemplo, el prefijo toh de Tour of Heroes).
 
@@ -430,7 +423,8 @@ clase de exportación UsersComponent {}
 **¿Por qué?** Las directivas se identifican fácilmente.
 
 app / shared / validate.directive.ts
-> / * evitar * /
+> *evitar*
+
 ```
 @Directiva({
   selector: '[validar]'
@@ -444,8 +438,8 @@ app / shared / validate.directive.ts
 })
 clase de exportación ValidateDirective {}
 ```
-#Nombres de los pipe
-##Estilo 02-09
+# Nombres de los pipe
+## Estilo 02-09
 
 **Do** Utilice nombres consistentes para todas los pipe, nombrados por su característica. El nombre de la clase pipe debe usar UpperCamelCase (la convención general para los nombres de clase), y la cadena de nombre correspondiente debe usar lowerCamelCase. La cadena de nombre no puede usar guiones ("dash-case" or "kebab-case").
 
@@ -453,13 +447,11 @@ clase de exportación ValidateDirective {}
 
 | Nombre de Elemento     | Nombre del archivo |
 | ------------- |:-------------:|
-|``` @Pipe ({nombre: 'puntos suspensivos'})
-export class EllipsisPipe implementa PipeTransform {} ```| ```ellipsis.pipe.ts``` |
-| ``` @Pipe ({nombre: 'initCaps'})
-la clase de exportación InitCapsPipe implementa PipeTransform {} ``` | ``` init-caps.pipe.ts ```   |
+|``` export class EllipsisPipe implementa PipeTransform {} ```| ```ellipsis.pipe.ts``` |
+| ``` export class InitCapsPipe implementa PipeTransform {} ``` | ``` init-caps.pipe.ts ```   |
 
-#Nombres de archivo de prueba unitaria
-##Estilo 02-10
+# Nombres de archivo de prueba unitaria
+## Estilo 02-10
 
 **Do** Nombre los archivos de especificación de prueba igual que el componente que prueban.
 
@@ -471,26 +463,18 @@ la clase de exportación InitCapsPipe implementa PipeTransform {} ``` | ``` init
 
 | Tipo de prueba | Nombre del archivo |
 | ------------- |:-------------:|
-| Componentes | heroes.component.spec.ts
-
-hero-list.component.spec.ts
-
-hero-detail.component.spec.ts |
-
-|Servicios| logger.service.spec.ts
-
-hero.service.spec.ts
-
-filter-text.service.spec.ts  |
+| Componentes | heroes.component.spec.ts|
+||hero-list.component.spec.ts|
+||hero-deta|il.component.spec.ts |
+|Servicios|| logger.service.spec.ts|
+||hero.service.spec.ts|
+||filter-text.service.spec.ts  |
+|Pipes| ellipsis.pipe.spec.ts|
+||init-caps.pipe.spec.ts |
 
 
-|Pipes| ellipsis.pipe.spec.ts
-
-init-caps.pipe.spec.ts |
-
-
-#Nombres de archivo de prueba de extremo a extremo (E2E)
-#Estilo 02-11
+# Nombres de archivo de prueba de extremo a extremo (E2E)
+## Estilo 02-11
 
 Nombre los archivos de especificación de prueba de extremo a extremo después de la característica que prueban con un sufijo .e2e-spec.
 
