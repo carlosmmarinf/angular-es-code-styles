@@ -735,35 +735,31 @@ Aquí hay una carpeta y estructura de archivos compatibles:
 
 **¿Por qué?** Un desarrollador puede localizar el código e identificar lo que cada archivo representa de un vistazo. La estructura es tan plana como puede ser y no hay nombres repetitivos o redundantes.
 
-¿Por qué? Las pautas de LIFT están todas cubiertas.
+**¿Por qué?** Las pautas de LIFT están todas cubiertas.
 
-¿Por qué? Ayuda a evitar que la aplicación se desordene organizando el contenido y manteniéndolo alineado con las pautas de LIFT.
+**¿Por qué?** Ayuda a evitar que la aplicación se desordene organizando el contenido y manteniéndolo alineado con las pautas de LIFT.
 
-¿Por qué? Cuando hay muchos archivos, por ejemplo 10+, localizarlos es más fácil con una estructura de carpetas consistente y más difícil en una estructura plana.
+**¿Por qué?** Cuando hay muchos archivos, por ejemplo 10+, localizarlos es más fácil con una estructura de carpetas consistente y más difícil en una estructura plana.
 
-Cree un NgModule para cada área de características.
+**Do** Cree un NgModule para cada área de características.
 
-¿Por qué? NgModules facilita la carga diferida de funciones enrutables.
+**¿Por qué?** hacer NgModules facilita la carga diferida de funciones enrutables.
 
-¿Por qué? NgModules facilita el aislamiento, la prueba y la reutilización de funciones.
-
-Para obtener más información, consulte este ejemplo de carpeta y estructura de archivos.
-
-Volver arriba
+**¿Por qué?** Hacer NgModules facilita el aislamiento, la prueba y la reutilización de funciones.
 
 
-Módulo raíz de la aplicación
-Estilo 04-08
-Cree un NgModule en la carpeta raíz de la aplicación, por ejemplo, en / src / app.
+## Módulo raíz de la aplicación
+### Estilo 04-08
+**Do** Cree un NgModule en la carpeta raíz de la aplicación, por ejemplo, en / src / app.
 
-¿Por qué? Cada aplicación requiere al menos un NgModule raíz.
+**¿Por qué?** Cada aplicación requiere al menos un NgModule raíz.
 
-Considere nombrar el módulo raíz app.module.ts.
+**Considere** nombrar el módulo raíz app.module.ts.
 
-¿Por qué? Facilita la localización e identificación del módulo raíz.
+**¿Por qué?** Facilita la localización e identificación del módulo raíz.
 
 app / app.module.ts
-content_copy
+```javascript
 importar {NgModule} desde '@ angular / core';
 importar {BrowserModule} desde '@ angular / platform-browser';
 
@@ -782,507 +778,691 @@ importar {HeroesComponent} desde './heroes/heroes.component';
   entryComponents: [AppComponent]
 })
 clase de exportación AppModule {}
-Volver arriba
+```
 
-Módulos de funciones
-Estilo 04-09
-Cree un NgModule para todas las características distintas en una aplicación; por ejemplo, una característica de héroes.
 
-Coloque el módulo de funciones en la misma carpeta con nombre que el área de funciones; por ejemplo, en app / heroes.
+## Módulos de Elementos
+### Estilo 04-09
 
-Asigne un nombre al archivo del módulo de funciones que refleje el nombre del área de funciones y la carpeta; por ejemplo, app / heroes / heroes.module.ts.
+**Do** Cree un NgModule para todas las características distintas en una aplicación; por ejemplo, una característica de Hero.
 
-Nombra el símbolo del módulo de características que refleja el nombre del área de funciones, carpeta y archivo; por ejemplo, app / heroes / heroes.module.ts define HeroesModule.
+**Do** Coloque el módulo de funciones en la misma carpeta con nombre que el área de funciones; por ejemplo, en app / heroes.
 
-¿Por qué? Un módulo de características puede exponer u ocultar su implementación de otros módulos.
+**Do** Asigne un nombre al archivo del módulo de funciones que refleje el nombre del área de funciones y la carpeta; por ejemplo, app / heroes / heroes.module.ts.
 
-¿Por qué? Un módulo de características identifica conjuntos distintos de componentes relacionados que comprenden el área de características.
+**Do** Nombra la firma del módulo de características reflejando el nombre del área de funciones, carpeta y archivo; por ejemplo, app / heroes / heroes.module.ts define HeroesModule.
 
-¿Por qué? Un módulo de funciones se puede enrutar fácilmente tanto con entusiasmo como con pereza.
+**¿Por qué?** Un módulo de características puede exponer u ocultar su implementación de otros módulos.
 
-¿Por qué? Un módulo de características define límites claros entre la funcionalidad específica y otras características de la aplicación.
+**¿Por qué?** Un módulo de características identifica conjuntos distintos de componentes relacionados que comprenden el área de características.
 
-¿Por qué? Un módulo de funciones ayuda a aclarar y facilitar la asignación de responsabilidades de desarrollo a diferentes equipos.
+**¿Por qué?** Un módulo de funciones se puede enrutar fácilmente eagerly o lazily.
 
-¿Por qué? Un módulo de funciones se puede aislar fácilmente para realizar pruebas.
+**¿Por qué?** Un módulo de características define límites claros entre la funcionalidad específica y otras características de la aplicación.
 
-Volver arriba
+**¿Por qué?** Un módulo de funciones ayuda a aclarar y facilitar la asignación de responsabilidades de desarrollo a diferentes equipos.
 
-Módulo de características compartidas
-Estilo 04-10
-Cree un módulo de funciones denominado SharedModule en una carpeta compartida; por ejemplo, app / shared / shared.module.ts define SharedModule.
+**¿Por qué?** Un módulo de funciones se puede aislar fácilmente para realizar pruebas.
 
-Declare componentes, directivas y canalizaciones en un módulo compartido cuando esos elementos serán reutilizados y referenciados por los componentes declarados en otros módulos de características.
 
-Considere usar el nombre SharedModule cuando se hace referencia a los contenidos de un módulo compartido en toda la aplicación.
+## Módulo de características compartidas
+### Estilo 04-10
+**Do** Cree un módulo de funciones denominado SharedModule en una carpeta compartida; por ejemplo, app / shared / shared.module.ts define SharedModule.
 
-Considere no proporcionar servicios en módulos compartidos. Los servicios suelen ser singletons que se proporcionan una vez para toda la aplicación o en un módulo de características en particular. Hay excepciones, sin embargo. Por ejemplo, en el código de muestra que sigue, observe que SharedModule proporciona FilterTextService. Esto es aceptable aquí porque el servicio no tiene estado; es decir, los consumidores del servicio no se ven afectados por nuevas instancias.
+**Do** Declare componentes, directivas y canalizaciones en un módulo compartido cuando esos elementos serán reutilizados y referenciados por los componentes declarados en otros módulos de características.
 
-Importe todos los módulos requeridos por los activos en SharedModule; por ejemplo, CommonModule y FormsModule.
+**Considere** usar el nombre SharedModule cuando se hace referencia a los contenidos de un módulo compartido en toda la aplicación.
 
-¿Por qué? SharedModule contendrá componentes, directivas y tuberías que pueden necesitar características de otro módulo común; por ejemplo, ngFor en CommonModule.
+**Considere** no proporcionar servicios en módulos compartidos. Los servicios suelen ser singletons que se proporcionan una vez para toda la aplicación o en un módulo de características en particular. Hay excepciones, sin embargo. Por ejemplo, en el código de muestra que sigue, observe que SharedModule proporciona FilterTextService. Esto es aceptable aquí porque el servicio no tiene estado; es decir, los consumidores del servicio no se ven afectados por nuevas instancias.
 
-Declare todos los componentes, directivas y tuberías en SharedModule.
+**Do** Importe todos los módulos requeridos por los activos en SharedModule; por ejemplo, CommonModule y FormsModule.
 
-Exporte todos los símbolos del SharedModule que otros módulos de características deben usar.
+**¿Por qué?** SharedModule contendrá componentes, directivas y tuberías que pueden necesitar características de otro módulo común; por ejemplo, ngFor en CommonModule.
 
-¿Por qué? SharedModule existe para hacer que los componentes, directivas y tuberías de uso común estén disponibles para su uso en las plantillas de componentes en muchos otros módulos.
+**Do** Declare todos los componentes, directivas y tuberías en SharedModule.
 
-Evite especificar proveedores de singleton para toda la aplicación en un SharedModule. Los singletons intencionales están bien. Cuídate.
+**Do** Exporte todos los símbolos del SharedModule que otros módulos de características deben usar.
 
-¿Por qué? Un módulo de funciones con carga lenta que importa ese módulo compartido hará su propia copia del servicio y probablemente tendrá resultados no deseados.
+**¿Por qué?** SharedModule existe para hacer que los componentes, directivas y tuberías de uso común estén disponibles para su uso en las plantillas de componentes en muchos otros módulos.
 
-¿Por qué? No desea que cada módulo tenga su propia instancia separada de servicios singleton. Sin embargo, existe un peligro real de que eso suceda si SharedModule proporciona un servicio.
+**Avoid** Evite especificar proveedores singleton para toda la aplicación en un SharedModule. Los singletons ocacionales están bien. tenga cuidado.
 
-src
-aplicación
-compartido
-shared.module.ts
-init-caps.pipe.ts | spec.ts
-filter-text.component.ts | spec.ts
-filter-text.service.ts | spec.ts
-app.component.ts | html | css | spec.ts
-app.module.ts
-app-routing.module.ts
-main.ts
-index.html
+**¿Por qué?** Un módulo de funciones con lazy load que importa ese módulo compartido hará su propia copia del servicio y probablemente tendrá resultados no deseados.
+
+**¿Por qué?** No desea que cada módulo tenga su propia instancia separada de servicios singleton. Sin embargo, existe un peligro real de que eso suceda si SharedModule proporciona un servicio.
+
+<pre>
++src
+|--+app
+|--|--+shared
+|--|--|--shared.module.ts
+|--|--|--init-caps.pipe.ts|spec.ts
+|--|--|--filter-text.component.ts|spec.ts
+|--|--|--filter-text.service.ts|spec.ts
+|--|--app.component.ts|html|css|spec.ts
+|--|--app.module.ts
+|--|--app-routing.module.ts
+|--main.ts
+|--index.html
 ...
-app / shared / shared.module.ts
-app / shared / init-caps.pipe.ts
-app / shared / filter-text / filter-text.component.ts
-app / shared / filter-text / filter-text.service.ts
-app / heroes / heroes.component.ts
-app / heroes / heroes.component.html
-content_copy
-importar {NgModule}
-de '@ angular / core';
-importar {CommonModule} desde '@ angular / common';
-importar {FormsModule} desde '@ angular / forms';
+</pre>
 
-importar {FilterTextComponent} desde './filter-text/filter-text.component';
-importar {FilterTextService} desde './filter-text/filter-text.service';
-importar {InitCapsPipe} desde './init-caps.pipe';
+>app/shared/shared.module.ts
+```javascript
+import { NgModule }      from '@angular/core';
+import { CommonModule }  from '@angular/common';
+import { FormsModule }   from '@angular/forms';
 
-@NgModule ({
-  importaciones: [CommonModule, FormsModule],
-  declaraciones: [
-    FilterTextComponent,
-    InitCapsPipe
-  ],
-  proveedores: [FilterTextService],
-  exportaciones: [
-    CommonModule,
-    FormsModule,
-    FilterTextComponent,
-    InitCapsPipe
-  ]
+import { FilterTextComponent } from './filter-text/filter-text.component';
+import { FilterTextService }   from './filter-text/filter-text.service';
+import { InitCapsPipe }        from './init-caps.pipe';
+
+@NgModule({
+  imports: [CommonModule, FormsModule],
+  declarations: [
+    FilterTextComponent,
+    InitCapsPipe
+  ],
+  providers: [FilterTextService],
+  exports: [
+    CommonModule,
+    FormsModule,
+    FilterTextComponent,
+    InitCapsPipe
+  ]
 })
-clase de exportación SharedModule {}
-Volver arriba
+export class SharedModule { }
+```
+>app/shared/init-caps.pipe.ts
+```javascript
+import { Pipe, PipeTransform } from '@angular/core';
 
-Carpetas cargadas perezosas
-Estilo 04-11
+@Pipe({ name: 'initCaps' })
+export class InitCapsPipe implements PipeTransform {
+  transform = (value: string) => value;
+}
+
+``
+>app/shared/filter-text/filter-text.component.ts
+```javascript
+import { Component, EventEmitter, Output } from '@angular/core';
+
+@Component({
+  selector: 'toh-filter-text',
+  template: '<input type="text" id="filterText" [(ngModel)]="filter" (keyup)="filterChanged($event)" />'
+})
+export class FilterTextComponent {
+  @Output() changed: EventEmitter<string>;
+
+  filter: string;
+
+  constructor() {
+    this.changed = new EventEmitter<string>();
+  }
+
+  clear() {
+    this.filter = '';
+  }
+
+  filterChanged(event: any) {
+    event.preventDefault();
+    console.log(`Filter Changed: ${this.filter}`);
+    this.changed.emit(this.filter);
+  }
+}
+```
+>app/shared/filter-text/filter-text.service.ts
+```javascript
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class FilterTextService {
+  constructor() {
+    console.log('Created an instance of FilterTextService');
+  }
+
+  filter(data: string, props: Array<string>, originalList: Array<any>) {
+    let filteredList: any[];
+    if (data && props && originalList) {
+      data = data.toLowerCase();
+      let filtered = originalList.filter(item => {
+        let match = false;
+        for (let prop of props) {
+          if (item[prop].toString().toLowerCase().indexOf(data) > -1) {
+            match = true;
+            break;
+          }
+        };
+        return match;
+      });
+      filteredList = filtered;
+    } else {
+      filteredList = originalList;
+    }
+    return filteredList;
+  }
+}
+```
+>app/heroes/heroes.component.ts
+```javascript
+import { Component } from '@angular/core';
+
+import { FilterTextService } from '../shared/filter-text/filter-text.service';
+
+@Component({
+  selector: 'toh-heroes',
+  templateUrl: './heroes.component.html'
+})
+export class HeroesComponent {
+
+  heroes = [
+    { id: 1, name: 'Windstorm' },
+    { id: 2, name: 'Bombasto' },
+    { id: 3, name: 'Magneta' },
+    { id: 4, name: 'Tornado' }
+  ];
+
+  filteredHeroes = this.heroes;
+
+  constructor(private filterService: FilterTextService) { }
+
+  filterChanged(searchText: string) {
+    this.filteredHeroes = this.filterService.filter(searchText, ['id', 'name'], this.heroes);
+  }
+}
+```
+>app/heroes/heroes.component.html
+```html
+<div>This is heroes component</div>
+<ul>
+  <li *ngFor="let hero of filteredHeroes">
+    {{hero.name}}
+  </li>
+</ul>
+<toh-filter-text (changed)="filterChanged($event)"></toh-filter-text>
+```
+
+
+
+## Carpetas de carga perezosa (Lazy load)
+### Estilo 04-11
 Una característica de aplicación o flujo de trabajo distinto puede cargarse de forma diferida o cargarse a pedido en lugar de cuando se inicia la aplicación.
 
-Ponga el contenido de las funciones cargadas diferidas en una carpeta cargada diferida. Una carpeta típica con carga lenta contiene un componente de enrutamiento, sus componentes secundarios y sus activos y módulos relacionados.
+**Do** Ponga el contenido de las funciones cargadas diferidas en una carpeta cargada diferida. Una carpeta típica con carga lenta contiene un componente de enrutamiento, sus componentes secundarios y sus activos y módulos relacionados.
 
-¿Por qué? La carpeta facilita la identificación y el aislamiento del contenido de la función.
+**¿Por qué?** La carpeta facilita la identificación y el aislamiento del contenido de la función.
 
-Volver arriba
 
-Nunca importe directamente carpetas cargadas perezosas
-Estilo 04-12
+## Nunca importe directamente carpetas de carga perezosa (Lazy load)
+### Estilo 04-12
 Evite permitir que los módulos en las carpetas de hermanos y padres importen directamente un módulo en una función de carga diferida.
 
-¿Por qué? La importación directa y el uso de un módulo lo cargarán inmediatamente cuando la intención sea cargarlo a pedido.
+**¿Por qué?** La importación directa y el uso de un módulo lo cargarán inmediatamente cuando la intención sea cargarlo a pedido.
 
-Volver arriba
 
-Componentes
-Componentes como elementos
-Estilo 05-03
-Considere dar a los componentes un selector de elementos, en oposición a los selectores de atributos o clases.
+### Componentes
+#### Componentes como elementos
+##### Estilo 05-03
+**Considere** dar a los componentes un selector de elementos, en oposición a los selectores de atributos o clases.
 
-¿Por qué? Los componentes tienen plantillas que contienen HTML y sintaxis de plantilla angular opcional. Muestran contenido. Los desarrolladores colocan componentes en la página como lo harían con elementos HTML nativos y componentes web.
+**¿Por qué?** Los componentes tienen plantillas que contienen HTML y sintaxis de plantilla angular opcional. Muestran contenido. Los desarrolladores colocan componentes en la página como lo harían con elementos HTML nativos y componentes web.
 
-¿Por qué? Es más fácil reconocer que un símbolo es un componente mirando el html de la plantilla.
+**¿Por qué?** Es más fácil reconocer que un símbolo es un componente mirando el html de la plantilla.
 
-Hay algunos casos en los que le da un atributo a un componente, como cuando desea aumentar un elemento incorporado. Por ejemplo, Material Design usa esta técnica con <button mat-button>. Sin embargo, no usaría esta técnica en un elemento personalizado.
+>Hay algunos casos en los que le da un atributo a un componente, como cuando desea aumentar un elemento incorporado. Por ejemplo, Material Design usa esta técnica con *\<button mat-button>*. Sin embargo, no usaría esta técnica en un elemento personalizado.
 
 app / heroes / hero-button / hero-button.component.ts
-content_copy
-/ * evitar * /
 
-@Componente({
-  selector: '[tohHeroButton]',
-  templateUrl: './hero-button.component.html'
+> *evitar*
+```javascript
+/* avoid */
+
+@Component({
+  selector: '[tohHeroButton]',
+  templateUrl: './hero-button.component.html'
 })
 export class HeroButtonComponent {}
-app / app.component.html
-content_copy
-<! - evitar ->
+```
 
-<div tohHeroButton> </div>
-app / heroes / shared / hero-button / hero-button.component.ts
-app / app.component.html
-content_copy
-@Componente({
-  selector: 'toh-hero-button',
-  templateUrl: './hero-button.component.html'
+app/app.component.html
+>*evitar*
+```html
+<!-- avoid -->
+
+<div tohHeroButton></div>
+```
+> **Lo correcto**
+app/heroes/shared/hero-button/hero-button.component.ts
+```javascript
+@Component({
+  selector: 'toh-hero-button',
+  templateUrl: './hero-button.component.html'
 })
 export class HeroButtonComponent {}
-Volver arriba
+```
+app/app.component.html
+```html
+<toh-hero-button></toh-hero-button>
+```
 
-Extraer plantillas y estilos en sus propios archivos.
-Estilo 05-04
-Extraiga plantillas y estilos en un archivo separado, cuando haya más de 3 líneas.
+### Extraer plantillas y estilos en sus propios archivos.
+#### Estilo 05-04
+**Do** Extraiga plantillas y estilos en un archivo separado, cuando haya más de 3 líneas.
 
-Nombre el archivo de plantilla [nombre-componente] .component.html, donde [nombre-componente] es el nombre del componente.
+**Do** Nombre el archivo de plantilla [nombre-componente] .component.html, donde [nombre-componente] es el nombre del componente.
 
-Nombre el archivo de estilo [nombre-componente] .component.css, donde [nombre-componente] es el nombre del componente.
+**Do** Nombre el archivo de estilo [nombre-componente] .component.css, donde [nombre-componente] es el nombre del componente.
 
-Especifique las URL relativas a los componentes, con el prefijo ./.
+**Do** Especifique las URL relativas a los componentes, con el prefijo ./.
 
-¿Por qué? Las plantillas y estilos grandes en línea oscurecen el propósito y la implementación del componente, reduciendo la legibilidad y la facilidad de mantenimiento.
+**¿Por qué?** Las plantillas y estilos grandes en línea oscurecen el propósito y la implementación del componente, reduciendo la legibilidad y la facilidad de mantenimiento.
 
-¿Por qué? En la mayoría de los editores, las sugerencias de sintaxis y los fragmentos de código no están disponibles al desarrollar plantillas y estilos en línea. Angular TypeScript Language Service (de próxima aparición) promete superar esta deficiencia para las plantillas HTML en aquellos editores que lo admitan; No ayudará con los estilos CSS.
+**¿Por qué?** En la mayoría de los editores, las sugerencias de sintaxis y los fragmentos de código no están disponibles al desarrollar plantillas y estilos en línea. Angular TypeScript Language Service (de próxima aparición) promete superar esta deficiencia para las plantillas HTML en aquellos editores que lo admitan; No ayudará con los estilos CSS.
 
-¿Por qué? La URL relativa de un componente no requiere cambios cuando mueve los archivos de componentes, siempre que los archivos permanezcan juntos.
+**¿Por qué?** La URL relativa de un componente no requiere cambios cuando mueve los archivos de componentes, siempre que los archivos permanezcan juntos.
 
-¿Por qué? El prefijo ./ es una sintaxis estándar para las URL relativas; no dependa de la capacidad actual de Angular para prescindir de ese prefijo.
+**¿Por qué?** El prefijo ./ es una sintaxis estándar para las URL relativas; no dependa de la capacidad actual de Angular para prescindir de ese prefijo.
+
+> *Evitar*
 
 app / heroes / heroes.component.ts
-content_copy
-/ * evitar * /
 
-@Componente({
-  selector: 'toh-heroes',
-  plantilla: `
-    <div>
-      <h2> Mis héroes </h2>
-      <ul class = "heroes">
-        <li * ngFor = "let hero of heroes | async" (click) = "selectedHero = hero">
-          <span class = "badge"> {{hero.id}} </span> {{hero.name}}
-        </li>
-      </ul>
-      <div * ngIf = "selectedHero">
-        <h2> {{selectedHero.name | mayúsculas}} es mi héroe </h2>
-      </div>
-    </div>
-  `,
-  estilos: [`
-    .heroes {
-      margen: 0 0 2em 0;
-      tipo-estilo-lista: ninguno;
-      relleno: 0;
-      ancho: 15em;
-    }
-    .heroes li {
-      cursor: puntero;
-      posición: relativa;
-      izquierda: 0;
-      color de fondo: #EEE;
-      margen: .5em;
-      relleno: .3em 0;
-      altura: 1.6em;
-      radio de borde: 4px;
-    }
-    .heroes .badge {
-      pantalla: bloque en línea;
-      tamaño de fuente: pequeño;
-      color blanco;
-      relleno: 0.8em 0.7em 0 0.7em;
-      color de fondo: # 607D8B;
-      altura de línea: 1em;
-      posición: relativa;
-      izquierda: -1px;
-      arriba: -4px;
-      altura: 1.8em;
-      margen derecho: .8em;
-      radio de borde: 4px 0 0 4px;
-    }
-  `]
+```javascript
+/* avoid */
+
+@Component({
+  selector: 'toh-heroes',
+  template: `
+    <div>
+      <h2>My Heroes</h2>
+      <ul class="heroes">
+        <li *ngFor="let hero of heroes | async" (click)="selectedHero=hero">
+          <span class="badge">{{hero.id}}</span> {{hero.name}}
+        </li>
+      </ul>
+      <div *ngIf="selectedHero">
+        <h2>{{selectedHero.name | uppercase}} is my hero</h2>
+      </div>
+    </div>
+  `,
+  styles: [`
+    .heroes {
+      margin: 0 0 2em 0;
+      list-style-type: none;
+      padding: 0;
+      width: 15em;
+    }
+    .heroes li {
+      cursor: pointer;
+      position: relative;
+      left: 0;
+      background-color: #EEE;
+      margin: .5em;
+      padding: .3em 0;
+      height: 1.6em;
+      border-radius: 4px;
+    }
+    .heroes .badge {
+      display: inline-block;
+      font-size: small;
+      color: white;
+      padding: 0.8em 0.7em 0 0.7em;
+      background-color: #607D8B;
+      line-height: 1em;
+      position: relative;
+      left: -1px;
+      top: -4px;
+      height: 1.8em;
+      margin-right: .8em;
+      border-radius: 4px 0 0 4px;
+    }
+  `]
 })
-export class HeroesComponent implementa OnInit {
-  héroes: Observable <Héroe []>;
-  selectedHero: Hero;
+export class HeroesComponent implements OnInit {
+  heroes: Observable<Hero[]>;
+  selectedHero: Hero;
 
- constructor (heroService privado: HeroService) {}
+ constructor(private heroService: HeroService) { }
 
-  ngOnInit () {
-    this.heroes = this.heroService.getHeroes ();
-  }
+  ngOnInit() {
+    this.heroes = this.heroService.getHeroes();
+  }
 }
-aplicación / héroes / héroes.
-
-componente.ts
-app / heroes / heroes.component.html
-app / heroes / heroes.component.css
-content_copy
-@Componente({
-  selector: 'toh-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+```
+> En lugar de eso
+app/heroes/heroes.component.ts
+```javascript
+@Component({
+  selector: 'toh-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls:  ['./heroes.component.css']
 })
-export class HeroesComponent implementa OnInit {
-  héroes: Observable <Héroe []>;
-  selectedHero: Hero;
+export class HeroesComponent implements OnInit {
+  heroes: Observable<Hero[]>;
+  selectedHero: Hero;
 
- constructor (heroService privado: HeroService) {}
+ constructor(private heroService: HeroService) { }
 
-  ngOnInit () {
-    this.heroes = this.heroService.getHeroes ();
-  }
+  ngOnInit() {
+    this.heroes = this.heroService.getHeroes();
+  }
 }
-Volver arriba
+```
+app/heroes/heroes.component.html
+```html
+<div>
+  <h2>My Heroes</h2>
+  <ul class="heroes">
+    <li *ngFor="let hero of heroes | async" (click)="selectedHero=hero">
+      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+  </ul>
+  <div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}} is my hero</h2>
+  </div>
+</div>
+```
+app/heroes/heroes.component.css
+```css
+.heroes {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+.heroes li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.heroes .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+```
 
-Decorar propiedades de entrada y salida
-Estilo 05-12
-Utilice los decoradores de clase @Input () y @Output () en lugar de las propiedades de entradas y salidas de los metadatos @Directive y @Component:
+### Decorar propiedades de entrada y salida (Añadir anotaciones)
+#### Estilo 05-12
+**Do** Utilice los decoradores de clase @Input () y @Output () en lugar de las propiedades de entradas y salidas de los metadatos @Directive y @Component:
 
-Considere colocar @Input () o @Output () en la misma línea que la propiedad que decora.
+**Considere*** colocar @Input () o @Output () en la misma línea que la propiedad que decora.
 
-¿Por qué? Es más fácil y más legible identificar qué propiedades en una clase son entradas o salidas.
+**¿Por qué?** Es más fácil y más legible identificar qué propiedades en una clase son entradas o salidas.
 
-¿Por qué? Si alguna vez necesita cambiar el nombre de la propiedad o el nombre del evento asociado con @Input o @Output, puede modificarlo en un solo lugar.
+**¿Por qué?** Si alguna vez necesita cambiar el nombre de la propiedad o el nombre del evento asociado con @Input o @Output, puede modificarlo en un solo lugar.
 
-¿Por qué? La declaración de metadatos adjunta a la directiva es más corta y, por lo tanto, más legible.
+**¿Por qué?** La declaración de metadatos adjunta a la directiva es más corta y, por lo tanto, más legible.
 
-¿Por qué? Colocar el decorador en la misma línea generalmente hace que el código sea más corto y aún así identifica fácilmente la propiedad como una entrada o salida. Póngalo en la línea de arriba cuando hacerlo sea claramente más legible.
+**¿Por qué?** Colocar el decorador en la misma línea generalmente hace que el código sea más corto y aún así identifica fácilmente la propiedad como una entrada o salida. Póngalo en la línea de arriba cuando hacerlo sea claramente más legible.
+
+> *Evitar*
 
 app / heroes / shared / hero-button / hero-button.component.ts
-content_copy
-/ * evitar * /
+```javascript
+/* avoid */
 
-@Componente({
-  selector: 'toh-hero-button',
-  plantilla: `<button> </button>`,
-  entradas: [
-    'etiqueta'
-  ],
-  salidas: [
-    'cambio'
-  ]
+@Component({
+  selector: 'toh-hero-button',
+  template: `<button></button>`,
+  inputs: [
+    'label'
+  ],
+  outputs: [
+    'change'
+  ]
 })
 export class HeroButtonComponent {
-  cambio = nuevo EventEmitter <any> ();
-  etiqueta: cadena;
+  change = new EventEmitter<any>();
+  label: string;
 }
+```
+> *En su lugar*
+
+app/heroes/shared/hero-button/hero-button.component.ts
+```javascript
+@Component({
+  selector: 'toh-hero-button',
+  template: `<button>{{label}}</button>`
+})
+export class HeroButtonComponent {
+  @Output() change = new EventEmitter<any>();
+  @Input() label: string;
+}
+```
+
+### Evite el alias de *inputs and outputs*
+#### Estilo 05-13
+**Do** Evite los alias de entrada y salida, excepto cuando tenga un propósito importante.
+
+**¿Por qué?** Dos nombres para la misma propiedad (uno privado, uno público) es intrínsecamente confuso.
+
+**¿Por qué?** Debe usar un alias cuando el nombre de la directiva también sea una propiedad de entrada y el nombre de la directiva no describa la propiedad.
+
+> *Evitar*
+
 app / heroes / shared / hero-button / hero-button.component.ts
-content_copy
-@Componente({
-  selector: 'toh-hero-button',
-  plantilla: `<button> {{label}} </button>`
+
+```javascript
+/* avoid pointless aliasing */
+
+@Component({
+  selector: 'toh-hero-button',
+  template: `<button>{{label}}</button>`
 })
 export class HeroButtonComponent {
-  @Output () change = new EventEmitter <any> ();
-  @Input () etiqueta: cadena;
+  // Pointless aliases
+  @Output('changeEvent') change = new EventEmitter<any>();
+  @Input('labelAttribute') label: string;
 }
-Volver arriba
+```
+app/app.component.html
+```html
+<!-- avoid -->
 
-Evite el alias de entradas y salidas
-Estilo 05-13
-Evite los alias de entrada y salida, excepto cuando tenga un propósito importante.
-
-¿Por qué? Dos nombres para la misma propiedad (uno privado, uno público) es intrínsecamente confuso.
-
-¿Por qué? Debe usar un alias cuando el nombre de la directiva también sea una propiedad de entrada y el nombre de la directiva no describa la propiedad.
-
-app / heroes / shared / hero-button / hero-button.component.ts
-content_copy
-/ * evitar alias sin sentido * /
-
-@Componente({
-  selector: 'toh-hero-button',
-  plantilla: `<button> {{label}} </button>`
-})
-export class HeroButtonComponent {
-  // Alias ​​sin sentido
-  @Output ('changeEvent') change = new EventEmitter <any> ();
-  @Input ('labelAttribute') etiqueta: cadena;
-}
-app / app.component.html
-content_copy
-<! - evitar ->
-
-<toh-hero-button labelAttribute = "OK" (changeEvent) = "doSomething ()">
+<toh-hero-button labelAttribute="OK" (changeEvent)="doSomething()">
 </toh-hero-button>
-app / heroes / shared / hero-button / hero-button.component.ts
-app / heroes / shared / hero-button / hero-highlight.directive.ts
-app / app.component.html
-content_copy
-@Componente({
-  selector: 'toh-hero-button',
-  plantilla: `<button> {{label}} </button>`
+```
+>**En su lugar**
+
+app/heroes/shared/hero-button/hero-button.component.ts
+```javascript
+@Component({
+  selector: 'toh-hero-button',
+  template: `<button>{{label}}</button>`
 })
 export class HeroButtonComponent {
-  // Sin alias
-  @Output () change = new EventEmitter <any> ();
-  @Input () etiqueta: cadena;
+  // No aliases
+  @Output() change = new EventEmitter<any>();
+  @Input() label: string;
 }
-Volver arriba
+```
+app/heroes/shared/hero-button/hero-highlight.directive.ts
+```javascript
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
-Secuencia de miembros
-Estilo 05-14
-Coloque las propiedades en la parte superior seguido de los métodos.
+@Directive({ selector: '[heroHighlight]' })
+export class HeroHighlightDirective implements OnChanges {
 
-Coloque a los miembros privados después de los miembros públicos, ordenados alfabéticamente.
+  // Aliased because `color` is a better property name than `heroHighlight`
+  @Input('heroHighlight') color: string;
 
-¿Por qué? Colocar a los miembros en una secuencia consistente hace que sea fácil de leer y ayuda a identificar instantáneamente qué miembros del componente sirven para qué propósito.
+  constructor(private el: ElementRef) {}
+
+  ngOnChanges() {
+    this.el.nativeElement.style.backgroundColor = this.color || 'yellow';
+  }
+}
+```
+app/app.component.html
+```html
+<toh-hero-button label="OK" (change)="doSomething()">
+</toh-hero-button>
+
+<!-- `heroHighlight` is both the directive name and the data-bound aliased property name -->
+<h3 heroHighlight="skyblue">The Great Bombasto</h3>
+
+```
+
+### Secuencia de miembros
+#### Estilo 05-14
+**Do** Coloque las propiedades en la parte superior seguido de los métodos.
+
+**Do** Coloque a los miembros privados después de los miembros públicos, ordenados alfabéticamente.
+
+**¿Por qué?** Colocar a los miembros en una secuencia consistente hace que sea fácil de leer y ayuda a identificar instantáneamente qué miembros del componente sirven para qué propósito.
+
+>*Evitar*
 
 app / shared / toast / toast.component.ts
-content_copy
-/ * evitar * /
+```javascript
+/* avoid */
 
-la clase de exportación ToastComponent implementa OnInit {
+export class ToastComponent implements OnInit {
 
-  valores predeterminados privados = {
-    título: '',
-    mensaje: "Que la Fuerza te acompañe"
-  };
-  mensaje: cadena;
-  título: cadena;
-  tostada privada Elemento: cualquiera;
+  private defaults = {
+    title: '',
+    message: 'May the Force be with you'
+  };
+  message: string;
+  title: string;
+  private toastElement: any;
 
-  ngOnInit () {
-    this.toastElement = document.getElementById ('toh-toast');
-  }
+  ngOnInit() {
+    this.toastElement = document.getElementById('toh-toast');
+  }
 
-  // métodos privados
-  hide privado () {
-    this.toastElement.style.opacity = 0;
-    window.setTimeout (() => this.toastElement.style.zIndex = 0, 400);
-  }
+  // private methods
+  private hide() {
+    this.toastElement.style.opacity = 0;
+    window.setTimeout(() => this.toastElement.style.zIndex = 0, 400);
+  }
 
-  activar (mensaje = this.defaults.message, título = this.defaults.title) {
-    this.title = title;
-    this.message = mensaje;
-    este espectáculo();
-  }
+  activate(message = this.defaults.message, title = this.defaults.title) {
+    this.title = title;
+    this.message = message;
+    this.show();
+  }
 
-  show privado() {
-    console.log (this.message);
-    this.toastElement.style.opacity = 1;
-    this.toastElement.style.zIndex = 9999;
+  private show() {
+    console.log(this.message);
+    this.toastElement.style.opacity = 1;
+    this.toastElement.style.zIndex = 9999;
 
-    window.setTimeout (() => this.hide (), 2500);
-  }
+    window.setTimeout(() => this.hide(), 2500);
+  }
 }
-app / shared / toast / toast.component.ts
-content_copy
-la clase de exportación ToastComponent implementa OnInit {
-  // propiedades públicas
-  mensaje: cadena;
-  título: cadena;
+```
 
-  // campos privados
-  valores predeterminados privados = {
-    título: '',
-    mensaje: "Que la Fuerza te acompañe"
-  };
-  tostada privada Elemento: cualquiera;
+> *En su lugar*
+app/shared/toast/toast.component.ts
+```javascript
+export class ToastComponent implements OnInit {
+  // public properties
+  message: string;
+  title: string;
 
-  // métodos públicos
-  activar (mensaje = this.defaults.message, título = this.defaults.title) {
-    this.title = title;
-    this.message = mensaje;
-    este espectáculo();
-  }
+  // private fields
+  private defaults = {
+    title: '',
+    message: 'May the Force be with you'
+  };
+  private toastElement: any;
 
-  ngOnInit () {
-    this.toastElement = document.getElementById ('toh-toast');
-  }
+  // public methods
+  activate(message = this.defaults.message, title = this.defaults.title) {
+    this.title = title;
+    this.message = message;
+    this.show();
+  }
 
-  // métodos privados
-  hide privado () {
-    this.toastElement.style.opacity = 0;
-    window.setTimeout (() => this.toastElement.style.zIndex = 0, 400);
-  }
+  ngOnInit() {
+    this.toastElement = document.getElementById('toh-toast');
+  }
 
-  show privado() {
-    console.log (this.message);
-    this.toastElement.style.opacity = 1;
-    this.toastElement.style.zIn
-    dex = 9999;
-    window.setTimeout (() => this.hide (), 2500);
-  }
+  // private methods
+  private hide() {
+    this.toastElement.style.opacity = 0;
+    window.setTimeout(() => this.toastElement.style.zIndex = 0, 400);
+  }
+
+  private show() {
+    console.log(this.message);
+    this.toastElement.style.opacity = 1;
+    this.toastElement.style.zIndex = 9999;
+    window.setTimeout(() => this.hide(), 2500);
+  }
 }
-Volver arriba
+```
 
-Delegar lógica de componentes complejos a servicios
-Estilo 05-15
-Limite la lógica en un componente solo a la requerida para la vista. Toda otra lógica debe delegarse a los servicios.
+### Delegar lógica de componentes complejos a servicios
+#### Estilo 05-15
+**Do*** Limite la lógica en un componente solo a la requerida para la vista. Toda otra lógica debe delegarse a los servicios.
 
-Mueva la lógica reutilizable a los servicios y mantenga los componentes simples y enfocados en su propósito previsto.
+**Do** Mueva la lógica reutilizable a los servicios y mantenga los componentes simples y enfocados en su propósito previsto.
 
-¿Por qué? La lógica puede ser reutilizada por múltiples componentes cuando se coloca dentro de un servicio y se expone a través de una función.
+**¿Por qué?** La lógica puede ser reutilizada por múltiples componentes cuando se coloca dentro de un servicio y se expone a través de una función.
 
-¿Por qué? La lógica en un servicio se puede aislar más fácilmente en una prueba unitaria, mientras que la lógica de llamada en el componente se puede burlar fácilmente.
+**¿Por qué?** La lógica en un servicio se puede aislar más fácilmente en una prueba unitaria, mientras que la lógica de llamada en el componente se puede burlar fácilmente.
 
-¿Por qué? Elimina dependencias y oculta detalles de implementación del componente.
+**¿Por qué?** Elimina dependencias y oculta detalles de implementación del componente.
 
-¿Por qué? Mantiene el componente delgado, recortado y enfocado.
+**¿Por qué?** Mantiene el componente delgado, recortado y enfocado.
+
+>*Evitar*
 
 app / heroes / hero-list / hero-list.component.ts
-content_copy
-/ * evitar * /
+```javascript
+/* avoid */
 
-importar {OnInit} desde '@ angular / core';
-importar {HttpClient} desde '@ angular / common / http';
+import { OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import {Observable} desde 'rxjs';
-importar {catchError, finalize} desde 'rxjs / operadores';
+import { Observable } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 
-importar {Hero} desde '../shared/hero.model';
+import { Hero } from '../shared/hero.model';
 
 const heroesUrl = 'http://angular.io';
 
-export class HeroListComponent implementa OnInit {
-  héroes: Héroe [];
-  constructor (http privado: HttpClient) {}
-  getHeroes () {
-    this.heroes = [];
-    this.http.get (heroesUrl) .pipe (
-      catchError (this.catchBadResponse),
-      finalize (() => this.hideSpinner ())
-    ) .subscribe ((heroes: Hero []) => this.heroes = heroes);
-  }
-  ngOnInit () {
-    this.getHeroes ();
-  }
+export class HeroListComponent implements OnInit {
+  heroes: Hero[];
+  constructor(private http: HttpClient) {}
+  getHeroes() {
+    this.heroes = [];
+    this.http.get(heroesUrl).pipe(
+      catchError(this.catchBadResponse),
+      finalize(() => this.hideSpinner())
+    ).subscribe((heroes: Hero[]) => this.heroes = heroes);
+  }
+  ngOnInit() {
+    this.getHeroes();
+  }
 
-  private catchBadResponse (err: any, fuente: Observable <any>) {
-    // registra y maneja la excepción
-    volver nuevo Observable ();
-  }
+  private catchBadResponse(err: any, source: Observable<any>) {
+    // log and handle the exception
+    return new Observable();
+  }
 
-  hideSpinner privado () {
-    // esconde la ruleta
-  }
+  private hideSpinner() {
+    // hide the spinner
+  }
 }
-app / heroes / hero-list / hero-list.component.ts
-content_copy
-importar {Component, OnInit} desde '@ angular / core';
-
-importar {Hero, HeroService} desde '../shared';
-
-@Componente({
-  selector: 'toh-hero-list',
-  plantilla: `...`
-})
-export class HeroListComponent implementa OnInit {
-  héroes: Héroe [];
-  constructor (heroService privado: HeroService) {}
-  getHeroes () {
-    this.heroes = [];
-    this.heroService.getHeroes ()
-      .subscribe (heroes => this.heroes = heroes);
-  }
-  ngOnInit () {
-    this.getHeroes ();
-  }
-}
-Volver arriba
+```
 
 No prefijas las propiedades de salida
 Estilo 05-16
