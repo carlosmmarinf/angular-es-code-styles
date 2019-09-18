@@ -1,3 +1,5 @@
+
+
 # angular-es-code-styles
 Transcripción de reglas de estilo angular
 Fuente: https://angular.io/guide/styleguide
@@ -24,17 +26,19 @@ Defina una cosa, como un servicio o componente, por archivo.
 Considere limitar los archivos a 400 líneas de código.
 
 **¿Por qué?** Un componente por archivo hace que sea mucho más fácil leer, mantener y evitar colisiones con equipos en el control de código fuente.
+
 **¿Por qué?** Un componente por archivo evita errores ocultos que a menudo surgen al combinar componentes en un archivo donde pueden compartir variables, crear cierres no deseados o un acoplamiento no deseado con dependencias.
+
 **¿Por qué?** Un solo componente puede ser la exportación predeterminada para su archivo, lo que facilita la carga diferida con el enrutador.
 
 La clave es hacer que el código sea más reutilizable, más fácil de leer y menos propenso a errores.
 
-El siguiente ejemplo negativo define AppComponent, inicia la aplicación, define el objeto modelo Hero y carga héroes del servidor en el mismo archivo. No hagas esto.
+El siguiente ejemplo negativo define AppComponent, inicia la aplicación, define el objeto modelo Hero y carga héroes del servidor en el mismo archivo. 
+> No hagas esto.
 
-```
 app / heroes / hero.component.ts
-content_copy
-/ * evitar * /
+
+```javascript
 importar {Component, NgModule, OnInit} desde '@ angular / core';
 importar {BrowserModule} desde '@ angular / platform-browser';
 importar {platformBrowserDynamic} desde '@ angular / platform-browser-dynamic';
@@ -482,194 +486,254 @@ Nombre los archivos de especificación de prueba de extremo a extremo después d
 
 ¿Por qué? Proporciona coincidencia de patrones para corredores de prueba y automatización de compilación.
 
-Nombre de archivo de tipo de prueba
-Pruebas de punta a punta
+|Tipo de prueba | Nombre del archivo |
+|:---:|:----:|
+|End-to-End Tests|app.e2e-spec.ts|
+||heroes.e2e-spec.ts|
 
-app.e2e-spec.ts
 
-heroes.e2e-spec.ts
+# Nombramiento de modulos - NgModule
+## Estilo 02-12
 
-Volver arriba
+**Do** Agregue el nombre del elemento con el sufijo Módulo.
 
-Nombres angulares de NgModule
-Estilo 02-12
-Agregue el nombre del símbolo con el sufijo Módulo.
+**Do** Asigne al nombre del archivo la extensión .module.ts.
 
-Asigne al nombre del archivo la extensión .module.ts.
+**Do** Nombre el módulo después de la función y la carpeta en la que reside.
 
-Nombre el módulo después de la función y la carpeta en la que reside.
+**¿Por qué?** Proporciona una forma coherente de identificar y hacer referencia rápidamente a los módulos.
 
-¿Por qué? Proporciona una forma coherente de identificar y hacer referencia rápidamente a los módulos.
+**¿Por qué?** Upper camel case es convencional para identificar objetos que pueden ser instanciados usando un constructor.
 
-¿Por qué? La caja de camello superior es convencional para identificar objetos que pueden ser instanciados usando un constructor.
+**¿Por qué?** Identifica fácilmente el módulo como la raíz de la característica con el mismo nombre.
 
-¿Por qué? Identifica fácilmente el módulo como la raíz de la característica con el mismo nombre.
+**Do** Sufije un nombre de clase RoutingModule con RoutingModule.
 
-Sufije un nombre de clase RoutingModule con RoutingModule.
+**Do** Finalice el nombre de archivo de un RoutingModule con -routing.module.ts.
 
-Finalice el nombre de archivo de un RoutingModule con -routing.module.ts.
+**¿Por qué?** Un RoutingModule es un módulo dedicado exclusivamente a la configuración del enrutador angular. Una convención de clase y nombre de archivo coherente hace que estos módulos sean fáciles de detectar y verificar.
 
-¿Por qué? Un RoutingModule es un módulo dedicado exclusivamente a la configuración del enrutador angular. Una convención de clase y nombre de archivo coherente hace que estos módulos sean fáciles de detectar y verificar.
 
-Nombre del símbolo Nombre del archivo
-content_copy
+<table>
+<tr>
+<th>
+Nombre del elemento
+</th>
+<th>
+Nombre del archivo
+</th>
+</tr>
+
+<tr>
+<td>
+<pre>
 @NgModule ({...})
-clase de exportación AppModule {}
-app.module.ts
+export class AppModule {}
+</pre>
+</td>
 
-content_copy
+<td>
+<pre>
+app.module.ts
+</pre>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>
 @NgModule ({...})
 export class HeroesModule {}
+</pre>
+</td>
+
+<td>
+<pre>
 heroes.module.ts
+</pre>
+</td>
+</tr>
 
-content_copy
+<tr>
+<td>
+<pre>
 @NgModule ({...})
-clase de exportación VillainsModule {}
-villains.module.ts
+export class VillainsModule {}
+</pre>
+</td>
 
-content_copy
+<td>
+<pre>
+villains.module.ts
+</pre>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>
 @NgModule ({...})
 clase de exportación AppRoutingModule {}
-app-routing.module.ts
+</pre>
+</td>
 
-content_copy
+<td>
+<pre>
+app-routing.module.ts
+</pre>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>
 @NgModule ({...})
 export class HeroesRoutingModule {}
+</pre>
+</td>
+
+<td>
+<pre>
 heroes-routing.module.ts
+</pre>
+</td>
+</tr>
+</table>
 
-Volver arriba
 
-Estructura de aplicación y NgModules
-Tener unvisión a largo plazo de la implementación y una visión a largo plazo. Comience con poco, pero tenga en cuenta hacia dónde se dirige la aplicación.
+
+# Estructura de aplicación y NgModules
+
+*Tener una visión a largo plazo de la implementación y una visión a largo plazo.* Comience con poco, pero tenga en cuenta hacia dónde se dirige la aplicación.
 
 Todo el código de la aplicación va en una carpeta llamada src. Todas las áreas de características están en su propia carpeta, con su propio NgModule.
 
-Todo el contenido es un activo por archivo. Cada componente, servicio y tubería está en su propio archivo. Todos los scripts de proveedores externos se almacenan en otra carpeta y no en la carpeta src. No los escribiste y no los quieres abarrotados de src. Use las convenciones de nomenclatura para archivos en esta guía. Volver arriba
+Todo el contenido es un elemento por archivo. Cada componente, servicio y tubería está en su propio archivo. Todos los scripts de proveedores externos se almacenan en otra carpeta y no en la carpeta src. No los escribiste y no los quieres abarrotados de src. Use las convenciones de nomenclatura para archivos en esta guía.
 
-LEVANTAR
-Estilo 04-01
-Estructure la aplicación de modo que pueda localizar el código rápidamente, identifique el código de un vistazo, mantenga la estructura más plana que pueda e intente estar SECO.
+## Lift
+### Estilo 04-01
 
-Defina la estructura para seguir estas cuatro pautas básicas, enumeradas en orden de importancia.
+**Do** Estructure la aplicación de modo que pueda localizar el código rápidamente, identifique el código de un vistazo, mantenga la estructura más plana que pueda.
 
-¿Por qué? LIFT proporciona una estructura consistente que escala bien, es modular y hace que sea más fácil aumentar la eficiencia del desarrollador al encontrar código rápidamente. Para confirmar su intuición sobre una estructura particular, pregunte: ¿puedo abrir rápidamente y comenzar a trabajar en todos los archivos relacionados para esta función?
+**Do** Defina la estructura para seguir estas cuatro pautas básicas, enumeradas en orden de importancia.
 
-Volver arriba
+**¿Por qué?** LIFT proporciona una estructura consistente que escala bien, es modular y hace que sea más fácil aumentar la eficiencia del desarrollador al encontrar código rápidamente. Para confirmar su intuición sobre una estructura particular, preguntese: *¿puedo abrir rápidamente y comenzar a trabajar en todos los archivos relacionados para esta función?*
 
-Localizar
-Estilo 04-02
-Haga que el código de localización sea intuitivo, simple y rápido.
 
-¿Por qué? Para trabajar de manera eficiente, debe poder encontrar archivos rápidamente, especialmente cuando no conoce (o no recuerda) los nombres de los archivos. Mantener los archivos relacionados cerca uno del otro en una ubicación intuitiva ahorra tiempo. Una estructura de carpetas descriptiva hace una gran diferencia para usted y las personas que vienen después de usted.
+## Locate
+### Estilo 04-02
+**Do** Localice el codigo de forma intuitiva, simple y rápida.
 
-Volver arriba
+**¿Por qué?** Para trabajar de manera eficiente, debe poder encontrar archivos rápidamente, especialmente cuando no conoce (o no recuerda) los nombres de los archivos. Mantener los archivos relacionados cerca uno del otro en una ubicación intuitiva ahorra tiempo. Una estructura de carpetas descriptiva hace una gran diferencia para usted y las personas que vienen después de usted.
 
-Identificar
-Estilo 04-03
-Asigne un nombre al archivo de manera que sepa instantáneamente lo que contiene y representa.
 
-Sea descriptivo con los nombres de archivo y mantenga el contenido del archivo exactamente en un componente.
+## Identify
+### Estilo 04-03
 
-Evite archivos con múltiples componentes, múltiples servicios o una mezcla.
+**Do** Asigne un nombre al archivo de manera que sepa instantáneamente lo que contiene y representa.
 
-¿Por qué? Pase menos tiempo buscando y picoteando códigos, y sea más eficiente. Los nombres de archivo más largos son mucho mejores que los nombres abreviados cortos pero oscuros.
+**Do** Sea descriptivo con los nombres de archivo y mantenga el contenido del archivo exactamente en un componente.
 
-Puede ser ventajoso desviarse de la regla de una cosa por archivo cuando tiene un conjunto de características pequeñas y estrechamente relacionadas que se descubren y entienden mejor en un solo archivo que como múltiples archivos. Ten cuidado con esta escapatoria.
+**Do** Evite archivos con múltiples componentes, múltiples servicios o una mezcla.
 
-Volver arriba
+**¿Por qué?** Pase menos tiempo buscando y picoteando códigos, y sera más eficiente. Los nombres de archivo más largos son mucho mejores que los nombres abreviados cortos pero confusos.
 
-Plano
-Estilo 04-04
-Mantenga una estructura de carpeta plana el mayor tiempo posible.
+> Puede ser ventajoso desviarse de la regla de una cosa por archivo cuando tiene un conjunto de características pequeñas y estrechamente relacionadas que se descubren y entienden mejor en un solo archivo que como múltiples archivos. Ten cuidado con esta practica.
 
-Considere crear subcarpetas cuando una carpeta llegue a siete o más archivos.
+## Flat
+### Estilo 04-04
+**Do** Mantenga una estructura de carpeta plana el mayor tiempo posible.
 
-Considere configurar el IDE para ocultar archivos irrelevantes y distractores, como los archivos .js y .js.map generados.
+**Do** Considere crear subcarpetas cuando una carpeta llegue a siete o más archivos.
 
-¿Por qué? Nadie quiere buscar un archivo a través de siete niveles de carpetas. Una estructura plana es fácil de escanear.
+**Considere** configurar el IDE para ocultar archivos irrelevantes y distractores, como los archivos .js y .js.map generados.
+
+**¿Por qué?** Nadie quiere buscar un archivo a través de siete niveles de carpetas. Una estructura plana es fácil de escanear.
 
 Por otro lado, los psicólogos creen que los humanos comienzan a luchar cuando el número de cosas interesantes adyacentes supera las nueve. Entonces, cuando una carpeta tiene diez o más archivos, puede ser el momento de crear subcarpetas.
 
 Base su decisión en su nivel de comodidad. Use una estructura más plana hasta que haya un valor obvio para crear una nueva carpeta.
 
-Volver arriba
+## T-DRY (Try to be DRY)
+### Estilo 04-05
+**Do** be DRY (Don't Repeat Yourself) (Evite ser redundante).
 
-T-DRY (Intenta estar SECO)
-Estilo 04-05
-Sé SECO (no te repitas).
+**Avoid** Evite estar tan DRY que sacrifique la legibilidad.
 
-Evite estar tan SECO que sacrifique la legibilidad.
+**¿Por qué?** Estar DRY es importante, pero no crucial si sacrifica los otros elementos de LIFT. Por eso se llama T-DRY. Por ejemplo, es redundante nombrar una plantilla hero-view.component.html porque con la extensión .html, obviamente es una vista. Pero si algo no es obvio o se aleja de una convención, entonces explíquelo.
 
-¿Por qué? Estar SECO es importante, pero no crucial si sacrifica los otros elementos de LIFT. Por eso se llama T-DRY. Por ejemplo, es redundante nombrar una plantilla hero-view.component.html porque con la extensión .html, obviamente es una vista. Pero si algo no es obvio o se aleja de una convención, entonces explíquelo.
 
-Volver arriba
+# Pautas estructurales generales
+### Estilo 04-06
+**Do** Comience con poco, pero tenga en cuenta hacia dónde se dirige la aplicación.
 
-Pautas estructurales generales
-Estilo 04-06
-Comience con poco, pero tenga en cuenta hacia dónde se dirige la aplicación.
+**Do** Tenga una visión a corto plazo de la implementación y una visión a largo plazo.
 
-Tenga una visión a corto plazo de la implementación y una visión a largo plazo.
+**Do** Coloque todo el código de la aplicación en una carpeta llamada src.
 
-Coloque todo el código de la aplicación en una carpeta llamada src.
+**Considere** crear una carpeta para un componente cuando tenga varios archivos de acompañamiento (.ts, .html, .css y .spec).
 
-Considere crear una carpeta para un componente cuando tenga varios archivos de acompañamiento (.ts, .html, .css y .spec).
+**¿Por qué?**  Ayuda a mantener la estructura de la aplicación pequeña y fácil de mantener en las primeras etapas, a la vez que es fácil de evolucionar a medida que la aplicación crece.
 
-¿Por qué? Ayuda a mantener la estructura de la aplicación pequeña y fácil de mantener en las primeras etapas, a la vez que es fácil de evolucionar a medida que la aplicación crece.
-
-¿Por qué? Los componentes a menudo tienen cuatro archivos (por ejemplo, * .html, * .css, * .ts y * .spec.ts) y pueden saturar una carpeta rápidamente.
+**¿Por qué?** Los componentes a menudo tienen cuatro archivos (por ejemplo, * .html, * .css, * .ts y * .spec.ts) y pueden saturar una carpeta rápidamente.
 
 Aquí hay una carpeta y estructura de archivos compatibles:
 
-<raíz del proyecto>
-src
-aplicación
-núcleo
-exception.service.ts | spec.ts
-user-profile.service.ts | spec.ts
-héroes
-héroe
-hero.component.ts | html | css | spec.ts
-lista de héroes
-hero-list.component.ts | html | css | spec.ts
-compartido
-hero-button.component.ts | html | css | spec.ts
-hero.model.ts
-hero.service.ts | spec.ts
-heroes.component.ts | html | css | spec.ts
-heroes.module.ts
-heroes-routing.module.ts
-compartido
-shared.module.ts
-init-caps.pipe.ts | spec.ts
-filter-text.component.ts | spec.ts
-filter-text.service.ts | spec.ts
-villanos
-villano
-...
-lista de villanos
-...
-compartido
-...
-villains.component.ts | html | css | spec.ts
-villains.module.ts
-villains-routing.module.ts
-app.component.ts | html | css | spec.ts
-app.module.ts
-app-routing.module.ts
-main.ts
-index.html
-...
-node_modules / ...
-...
-Si bien los componentes en carpetas dedicadas son ampliamente preferidos, otra opción para aplicaciones pequeñas es mantener los componentes planos (no en una carpeta dedicada). Esto agrega hasta cuatro archivos a la carpeta existente, pero también reduce el anidamiento de la carpeta. Lo que elija, sea consistente.
+<pre>
++<project root>
+|--+src
+|--|-+app
+|--|-|-+core
+|--|-|-|--exception.service.ts|spec.ts
+|--|-|-|--user-profile.service.ts|spec.ts
+|--|-|-+heroes
+|--|-|-|-+hero
+|--|-|-|-|--hero.component.ts|html|css|spec.ts
+|--|-|-|-+hero-list
+|--|-|-|-|--hero-list.component.ts|html|css|spec.ts
+|--|-|-|-+shared
+|--|-|-|-|--hero-button.component.ts|html|css|spec.ts
+|--|-|-|-|--hero.model.ts
+|--|-|-|-|--hero.service.ts|spec.ts
+|--|-|-|--heroes.component.ts|html|css|spec.ts
+|--|-|-|--heroes.module.ts
+|--|-|-|--heroes-routing.module.ts
+|--|-|-+shared
+|--|-|-|--shared.module.ts
+|--|-|-|--init-caps.pipe.ts|spec.ts
+|--|-|-|--filter-text.component.ts|spec.ts
+|--|-|-|--filter-text.service.ts|spec.ts
+|--|-|-+villains
+|--|-|-|-+villain
+|--|-|-|-|--...
+|--|-|-|-+villain-list
+|--|-|-|-|--...
+|--|-|-|-+shared
+|--|-|-|-|--...
+|--|-|-|--villains.component.ts|html|css|spec.ts
+|--|-|-|--villains.module.ts
+|--|-|-|--villains-routing.module.ts
+|--|-|-|--app.component.ts|html|css|spec.ts
+|--|-|-|--app.module.ts
+|--|-|-|--app-routing.module.ts
+|--|--main.ts
+|--|--index.html
+|--|--...
+|--node_modules/...
+|--...
 
-Volver arriba
+</pre>
 
-Carpetas por feaestructura de ture
-Estilo 04-07
-Cree carpetas con el nombre del área de características que representan.
 
-¿Por qué? Un desarrollador puede localizar el código e identificar lo que cada archivo representa de un vistazo. La estructura es tan plana como puede ser y no hay nombres repetitivos o redundantes.
+
+>Si bien los componentes en carpetas dedicadas son ampliamente preferidos, otra opción para aplicaciones pequeñas es mantener los componentes planos (no en una carpeta dedicada). Esto agrega hasta cuatro archivos a la carpeta existente, pero también reduce el anidamiento de la carpeta. Lo que elija, sea consistente.
+
+
+## Estructura de folders por funcionalidad
+### Estilo 04-07
+**Do** Cree carpetas con el nombre del área de características que representan.
+
+**¿Por qué?** Un desarrollador puede localizar el código e identificar lo que cada archivo representa de un vistazo. La estructura es tan plana como puede ser y no hay nombres repetitivos o redundantes.
 
 ¿Por qué? Las pautas de LIFT están todas cubiertas.
 
