@@ -1758,3 +1758,6 @@ export class HeroArena {
 **¿Por qué?** Los detalles de la gestión de datos, como encabezados, métodos HTTP, almacenamiento en caché, manejo de errores y lógica de reintento, son irrelevantes para los componentes y otros consumidores de datos.
 
 Un servicio de datos encapsula estos detalles. Es más fácil evolucionar estos detalles dentro del servicio consin afectar a sus consumidores. Y es más fácil probar a los consumidores con implementaciones de servicios simulados.
+
+## Referencias
+1. https://angular.io/guide/styleguide
