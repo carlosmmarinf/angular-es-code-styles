@@ -1,10 +1,8 @@
 
 
 # angular-es-code-styles
-Transcripción de reglas de estilo angular
-Fuente: https://angular.io/guide/styleguide
 
-# Vocabulario de estilo
+### Vocabulario de estilo
 Cada guía describe una buena o mala práctica, y todas tienen una presentación consistente.
 
 La redacción de cada directriz indica cuán fuerte es la recomendación.
@@ -17,11 +15,11 @@ La redacción de cada directriz indica cuán fuerte es la recomendación.
 
 **¿Por qué?** da razones para seguir las recomendaciones anteriores.
 
-**Responsabilidad única**
+## Responsabilidad única
 Aplique el principio de responsabilidad única (SRP) a todos los componentes, servicios y otros símbolos. Esto ayuda a que la aplicación sea más limpia, más fácil de leer y mantener, y más comprobable.
 
-# Regla de uno
-## Estilo 01-01
+### Regla de uno
+#### Estilo 01-01
 Defina una cosa, como un servicio o componente, por archivo.
 Considere limitar los archivos a 400 líneas de código.
 
@@ -90,7 +88,7 @@ función getHeroes (): Promesa <Héroe []> {
 Es una mejor práctica redistribuir el componente y sus clases de soporte en sus propios archivos dedicados.
 
 main.ts
-```
+```javascript
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
@@ -121,7 +119,7 @@ export class AppModule { }
 ```
 
 app / app.component.ts
-```
+```javascript
 import { Component } from '@angular/core';
 
 import { HeroService } from './heroes';
@@ -137,7 +135,7 @@ import { HeroService } from './heroes';
 export class AppComponent {}
 ```
 app / heroes / heroes.component.ts
-```
+```javascript
 import { Component, OnInit } from '@angular/core';
 
 import { Hero, HeroService } from './shared';
@@ -161,7 +159,7 @@ export class HeroesComponent implements OnInit {
 ```
 
 app / heroes / shared / hero.service.ts
-```
+```javascript
 import { Injectable } from '@angular/core';
 
 import { HEROES } from './mock-heroes';
@@ -175,7 +173,7 @@ export class HeroService {
 ```
 
 app / heroes / shared / hero.model.ts
-```
+```javascript
 export class Hero {
   id: number;
   name: string;
@@ -183,7 +181,7 @@ export class Hero {
 ```
 
 app / heroes / shared / mock-heroes.ts
-```
+```javascript
 import { Hero } from './hero.model';
 
 export const HEROES: Hero[] = [
@@ -195,8 +193,8 @@ export const HEROES: Hero[] = [
 
 A medida que la aplicación crece, esta regla se vuelve aún más importante.
 
-# Funciones pequeñas
-## Estilo 01-02
+### Funciones pequeñas
+#### Estilo 01-02
 Definir funciones pequeñas
 
 Considere limitar a no más de 75 líneas.
@@ -212,11 +210,11 @@ Considere limitar a no más de 75 líneas.
 **¿Por qué?** Las funciones pequeñas ayudan a evitar errores ocultos que vienen con funciones grandes que comparten variables con un alcance externo, crean cierres no deseados o acoplamiento no deseado con dependencias.
 
 
-# Nombrar
+## Nombrar
 Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la legibilidad. Esta guía recomienda convenciones de nomenclatura para el nombre del archivo y el nombre del símbolo.
 
-# Pautas generales de nomenclatura
-## Estilo 02-01
+### Pautas generales de nomenclatura
+#### Estilo 02-01
 
 **Do** Utilice nombres consistentes para todos los elementos.
 **Do** Siga un patrón que describa la característica del elemento y luego su tipo. El patrón recomendado es feature.type.ts.
@@ -229,8 +227,8 @@ Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la
 
 **¿Por qué?** Los nombres de carpetas y archivos deben transmitir claramente su intención. Por ejemplo, app / heroes / hero-list.component.ts puede contener un componente que gestiona una lista de héroes.
 
-# Separe los nombres de archivo con puntos y guiones
-## Estilo 02-02
+### Separe los nombres de archivo con puntos y guiones
+#### Estilo 02-02
 
 **Do** Utilice guiones para separar palabras en el nombre descriptivo.
 
@@ -248,8 +246,8 @@ Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la
 
 **¿Por qué?** Los nombres de tipo proporcionan coincidencia de patrones para cualquier tarea automatizada.
 
-# Elementos y nombres de archivos
-## Estilo 02-03
+### Elementos y nombres de archivos
+#### Estilo 02-03
 
 **Do** Utilice nombres consistentes para todos los activos nombrados después de lo que representan.
 
@@ -275,8 +273,8 @@ Las convenciones de nomenclatura son muy importantes para la mantenibilidad y la
 |``` export class InitCapsPipe implementa PipeTransform {} ```| ``` init-caps.pipe.ts ``` |
 |``` export class UserProfileService {} ``` | ``` user-profile.service.ts ``` |
 
-# Nombres de servicio
-## Estilo 02-04
+### Nombres de servicio
+#### Estilo 02-04
 **Do** Utilice nombres consistentes para todos los servicios nombrados después de su función.
 
 **Do** Sufije un nombre de clase de servicio con Servicio. Por ejemplo, algo que obtiene datos o héroes debería llamarse DataService o HeroService.
@@ -297,8 +295,8 @@ Algunos términos son servicios inequívocos. Normalmente indican agencia termin
 | ```export class Logger { }``` | ``` logger.service.ts ``` |
 
 
-# Bootstrapping
-## Estilo 02-05
+### Bootstrapping
+#### Estilo 02-05
 
 **Do** Ponga bootstrapping y lógica de plataforma para la aplicación en un archivo llamado main.ts.
 
@@ -311,7 +309,7 @@ Algunos términos son servicios inequívocos. Normalmente indican agencia termin
 **¿Por qué?** Sigue una convención familiar de otras plataformas tecnológicas.
 
 main.ts
-```
+```javascript
 importar {platformBrowserDynamic} desde '@ angular / platform-browser-dynamic';
 
 importar {AppModule} desde './app/app.module';
@@ -321,8 +319,8 @@ platformBrowserDynamic (). bootstrapModule (AppModule)
   .catch (err => console.error (err));
 ```
 
-# Selectores de componentes
-## Estilo 05-02
+### Selectores de componentes
+#### Estilo 05-02
 
 **Do** Use dashed-case or kebab-case para nombrar los selectores de elementos de los componentes.
 
@@ -330,8 +328,8 @@ platformBrowserDynamic (). bootstrapModule (AppModule)
 
 app / heroes / shared / hero-button / hero-button.component.ts
 
-> *evitar*
-```
+> *Evitar*
+```javascript
 @Componente({
   selector: 'tohHeroButton',
   templateUrl: './hero-button.component.html'
@@ -342,7 +340,7 @@ export class HeroButtonComponent {}
 
 app / heroes / shared / hero-button / hero-button.component.ts
 
-```
+```javascript
 @Component({
   selector: 'toh-hero-button',
   templateUrl: './hero-button.component.html'
@@ -352,13 +350,13 @@ export class HeroButtonComponent {}
 ```
 
 app / app.component.html
-```
+```html
 <toh-hero-button></toh-hero-button>
 ```
 
 
-# Prefijo personalizado de componente
-## Estilo 02-07
+### Prefijo personalizado de componente
+#### Estilo 02-07
 
 **Do** Utilice un valor de selector de elemento en minúsculas con guión; por ejemplo, *admin-users* .
 
@@ -374,18 +372,19 @@ app / app.component.html
 
 app / heroes / hero.component.ts
 
-> *evitar*
-```
+> *Evitar*
+```javascript
 // HeroComponent está en la función Tour of Heroes
 @Componente({
   selector: 'héroe'
 })
 export class HeroComponent {}
 ```
+
 app / users / users.component.ts
 
 > *evitar*
-```
+```javascript
 // UsersComponent está en una función de administrador
 @Componente({
   selector: 'usuarios'
@@ -393,21 +392,21 @@ app / users / users.component.ts
 clase de exportación UsersComponent {}
 ```
 app / heroes / hero.component.ts
-```
+```javascript
 @Componente({
   selector: 'toh-hero'
 })
 export class HeroComponent {}
 ```
 app / users / users.component.ts
-```
+```javascript
 @Componente({
   selector: 'admin-users'
 })
 clase de exportación UsersComponent {}
 ```
-# Selectores de directivas
-## Estilo 02-06
+### Selectores de directivas
+#### Estilo 02-06
 
 **Do** Utilice minúsculas de camello para nombrar los selectores de directivas.
 
@@ -415,8 +414,8 @@ clase de exportación UsersComponent {}
 
 **¿Por qué?** El analizador HTML angular distingue entre mayúsculas y minúsculas y reconoce las minúsculas de camello.
 
-# Prefijo personalizado de directiva
-## Estilo 02-08
+### Prefijo personalizado de directiva
+#### Estilo 02-08
 
 **Do** Utilice un prefijo personalizado para el selector de directivas (por ejemplo, el prefijo toh de Tour of Heroes).
 
@@ -429,21 +428,22 @@ clase de exportación UsersComponent {}
 app / shared / validate.directive.ts
 > *evitar*
 
-```
+```javascript
 @Directiva({
   selector: '[validar]'
 })
 clase de exportación ValidateDirective {}
 ```
 app / shared / validate.directive.ts
-```
+```javascript
 @Directiva({
   selector: '[tohValidate]'
 })
 clase de exportación ValidateDirective {}
 ```
-# Nombres de los pipe
-## Estilo 02-09
+
+### Nombres de los pipe
+#### Estilo 02-09
 
 **Do** Utilice nombres consistentes para todas los pipe, nombrados por su característica. El nombre de la clase pipe debe usar UpperCamelCase (la convención general para los nombres de clase), y la cadena de nombre correspondiente debe usar lowerCamelCase. La cadena de nombre no puede usar guiones ("dash-case" or "kebab-case").
 
@@ -454,8 +454,8 @@ clase de exportación ValidateDirective {}
 |``` export class EllipsisPipe implementa PipeTransform {} ```| ```ellipsis.pipe.ts``` |
 | ``` export class InitCapsPipe implementa PipeTransform {} ``` | ``` init-caps.pipe.ts ```   |
 
-# Nombres de archivo de prueba unitaria
-## Estilo 02-10
+### Nombres de archivo de prueba unitaria
+#### Estilo 02-10
 
 **Do** Nombre los archivos de especificación de prueba igual que el componente que prueban.
 
@@ -477,14 +477,14 @@ clase de exportación ValidateDirective {}
 ||init-caps.pipe.spec.ts |
 
 
-# Nombres de archivo de prueba de extremo a extremo (E2E)
-## Estilo 02-11
+### Nombres de archivo de prueba de extremo a extremo (E2E)
+#### Estilo 02-11
 
-Nombre los archivos de especificación de prueba de extremo a extremo después de la característica que prueban con un sufijo .e2e-spec.
+**Do** Nombre los archivos de especificación de prueba de extremo a extremo después de la característica que prueban con un sufijo .e2e-spec.
 
-¿Por qué? Proporciona una forma consistente de identificar rápidamente las pruebas de extremo a extremo.
+**¿Por qué?** Proporciona una forma consistente de identificar rápidamente las pruebas de extremo a extremo.
 
-¿Por qué? Proporciona coincidencia de patrones para corredores de prueba y automatización de compilación.
+**¿Por qué?** Proporciona coincidencia de patrones para corredores de prueba y automatización de compilación.
 
 |Tipo de prueba | Nombre del archivo |
 |:---:|:----:|
@@ -492,8 +492,8 @@ Nombre los archivos de especificación de prueba de extremo a extremo después d
 ||heroes.e2e-spec.ts|
 
 
-# Nombramiento de modulos - NgModule
-## Estilo 02-12
+### Nombramiento de modulos - NgModule
+#### Estilo 02-12
 
 **Do** Agregue el nombre del elemento con el sufijo Módulo.
 
@@ -610,8 +610,8 @@ Todo el código de la aplicación va en una carpeta llamada src. Todas las área
 
 Todo el contenido es un elemento por archivo. Cada componente, servicio y tubería está en su propio archivo. Todos los scripts de proveedores externos se almacenan en otra carpeta y no en la carpeta src. No los escribiste y no los quieres abarrotados de src. Use las convenciones de nomenclatura para archivos en esta guía.
 
-## Lift
-### Estilo 04-01
+### Lift
+#### Estilo 04-01
 
 **Do** Estructure la aplicación de modo que pueda localizar el código rápidamente, identifique el código de un vistazo, mantenga la estructura más plana que pueda.
 
@@ -620,15 +620,15 @@ Todo el contenido es un elemento por archivo. Cada componente, servicio y tuber�
 **¿Por qué?** LIFT proporciona una estructura consistente que escala bien, es modular y hace que sea más fácil aumentar la eficiencia del desarrollador al encontrar código rápidamente. Para confirmar su intuición sobre una estructura particular, preguntese: *¿puedo abrir rápidamente y comenzar a trabajar en todos los archivos relacionados para esta función?*
 
 
-## Locate
-### Estilo 04-02
+### Locate
+#### Estilo 04-02
 **Do** Localice el codigo de forma intuitiva, simple y rápida.
 
 **¿Por qué?** Para trabajar de manera eficiente, debe poder encontrar archivos rápidamente, especialmente cuando no conoce (o no recuerda) los nombres de los archivos. Mantener los archivos relacionados cerca uno del otro en una ubicación intuitiva ahorra tiempo. Una estructura de carpetas descriptiva hace una gran diferencia para usted y las personas que vienen después de usted.
 
 
-## Identify
-### Estilo 04-03
+### Identify
+#### Estilo 04-03
 
 **Do** Asigne un nombre al archivo de manera que sepa instantáneamente lo que contiene y representa.
 
@@ -640,8 +640,8 @@ Todo el contenido es un elemento por archivo. Cada componente, servicio y tuber�
 
 > Puede ser ventajoso desviarse de la regla de una cosa por archivo cuando tiene un conjunto de características pequeñas y estrechamente relacionadas que se descubren y entienden mejor en un solo archivo que como múltiples archivos. Ten cuidado con esta practica.
 
-## Flat
-### Estilo 04-04
+### Flat
+#### Estilo 04-04
 **Do** Mantenga una estructura de carpeta plana el mayor tiempo posible.
 
 **Do** Considere crear subcarpetas cuando una carpeta llegue a siete o más archivos.
@@ -654,8 +654,8 @@ Por otro lado, los psicólogos creen que los humanos comienzan a luchar cuando e
 
 Base su decisión en su nivel de comodidad. Use una estructura más plana hasta que haya un valor obvio para crear una nueva carpeta.
 
-## T-DRY (Try to be DRY)
-### Estilo 04-05
+### T-DRY (Try to be DRY)
+#### Estilo 04-05
 **Do** be DRY (Don't Repeat Yourself) (Evite ser redundante).
 
 **Avoid** Evite estar tan DRY que sacrifique la legibilidad.
@@ -663,8 +663,8 @@ Base su decisión en su nivel de comodidad. Use una estructura más plana hasta 
 **¿Por qué?** Estar DRY es importante, pero no crucial si sacrifica los otros elementos de LIFT. Por eso se llama T-DRY. Por ejemplo, es redundante nombrar una plantilla hero-view.component.html porque con la extensión .html, obviamente es una vista. Pero si algo no es obvio o se aleja de una convención, entonces explíquelo.
 
 
-# Pautas estructurales generales
-### Estilo 04-06
+### Pautas estructurales generales
+#### Estilo 04-06
 **Do** Comience con poco, pero tenga en cuenta hacia dónde se dirige la aplicación.
 
 **Do** Tenga una visión a corto plazo de la implementación y una visión a largo plazo.
@@ -729,8 +729,8 @@ Aquí hay una carpeta y estructura de archivos compatibles:
 >Si bien los componentes en carpetas dedicadas son ampliamente preferidos, otra opción para aplicaciones pequeñas es mantener los componentes planos (no en una carpeta dedicada). Esto agrega hasta cuatro archivos a la carpeta existente, pero también reduce el anidamiento de la carpeta. Lo que elija, sea consistente.
 
 
-## Estructura de folders por funcionalidad
-### Estilo 04-07
+### Estructura de folders por funcionalidad
+#### Estilo 04-07
 **Do** Cree carpetas con el nombre del área de características que representan.
 
 **¿Por qué?** Un desarrollador puede localizar el código e identificar lo que cada archivo representa de un vistazo. La estructura es tan plana como puede ser y no hay nombres repetitivos o redundantes.
@@ -748,8 +748,8 @@ Aquí hay una carpeta y estructura de archivos compatibles:
 **¿Por qué?** Hacer NgModules facilita el aislamiento, la prueba y la reutilización de funciones.
 
 
-## Módulo raíz de la aplicación
-### Estilo 04-08
+### Módulo raíz de la aplicación
+#### Estilo 04-08
 **Do** Cree un NgModule en la carpeta raíz de la aplicación, por ejemplo, en / src / app.
 
 **¿Por qué?** Cada aplicación requiere al menos un NgModule raíz.
@@ -781,8 +781,8 @@ clase de exportación AppModule {}
 ```
 
 
-## Módulos de Elementos
-### Estilo 04-09
+### Módulos de Elementos
+#### Estilo 04-09
 
 **Do** Cree un NgModule para todas las características distintas en una aplicación; por ejemplo, una característica de Hero.
 
@@ -805,8 +805,8 @@ clase de exportación AppModule {}
 **¿Por qué?** Un módulo de funciones se puede aislar fácilmente para realizar pruebas.
 
 
-## Módulo de características compartidas
-### Estilo 04-10
+### Módulo de características compartidas
+#### Estilo 04-10
 **Do** Cree un módulo de funciones denominado SharedModule en una carpeta compartida; por ejemplo, app / shared / shared.module.ts define SharedModule.
 
 **Do** Declare componentes, directivas y canalizaciones en un módulo compartido cuando esos elementos serán reutilizados y referenciados por los componentes declarados en otros módulos de características.
@@ -984,8 +984,8 @@ export class HeroesComponent {
 
 
 
-## Carpetas de carga perezosa (Lazy load)
-### Estilo 04-11
+### Carpetas de carga perezosa (Lazy load)
+#### Estilo 04-11
 Una característica de aplicación o flujo de trabajo distinto puede cargarse de forma diferida o cargarse a pedido en lugar de cuando se inicia la aplicación.
 
 **Do** Ponga el contenido de las funciones cargadas diferidas en una carpeta cargada diferida. Una carpeta típica con carga lenta contiene un componente de enrutamiento, sus componentes secundarios y sus activos y módulos relacionados.
@@ -993,8 +993,8 @@ Una característica de aplicación o flujo de trabajo distinto puede cargarse de
 **¿Por qué?** La carpeta facilita la identificación y el aislamiento del contenido de la función.
 
 
-## Nunca importe directamente carpetas de carga perezosa (Lazy load)
-### Estilo 04-12
+### Nunca importe directamente carpetas de carga perezosa (Lazy load)
+#### Estilo 04-12
 Evite permitir que los módulos en las carpetas de hermanos y padres importen directamente un módulo en una función de carga diferida.
 
 **¿Por qué?** La importación directa y el uso de un módulo lo cargarán inmediatamente cuando la intención sea cargarlo a pedido.
@@ -1463,317 +1463,298 @@ export class HeroListComponent implements OnInit {
   }
 }
 ```
+>*En su lugar*
+app/heroes/hero-list/hero-list.component.ts
 
-No prefijas las propiedades de salida
-Estilo 05-16
-Nombre los eventos sin el prefijo activado.
+```javascript
+import { Component, OnInit } from '@angular/core';
 
-Nombre los métodos del controlador de eventos con el prefijo seguido del nombre del evento.
+import { Hero, HeroService } from '../shared';
 
-¿Por qué? Esto es coherente con los eventos integrados, como los clics en los botones.
+@Component({
+  selector: 'toh-hero-list',
+  template: `...`
+})
+export class HeroListComponent implements OnInit {
+  heroes: Hero[];
+  constructor(private heroService: HeroService) {}
+  getHeroes() {
+    this.heroes = [];
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
+  }
+  ngOnInit() {
+    this.getHeroes();
+  }
+}
 
-¿Por qué? Angular permite una sintaxis alternativa en- *. Si el evento en sí tenía el prefijo on, esto daría como resultado una expresión de enlace on-onEvent.
+```
+
+### No use prefijos en las propiedades de salida
+#### Estilo 05-16
+
+**Do** Nombre los eventos sin el prefijo activado.
+
+**Do** Nombre los métodos del controlador de eventos con el prefijo seguido del nombre del evento.
+
+**¿Por qué?** Esto es coherente con los eventos integrados, como los clics en los botones.
+
+**¿Por qué?** Angular permite una sintaxis alternativa en- *. Si el evento en sí tenía el prefijo on, esto daría como resultado una expresión de enlace on-onEvent.
 
 app / heroes / hero.component.ts
-content_copy
-/ * evitar * /
+>*Evitar*
+```javascript
+/* avoid */
 
-@Componente({
-  selector: 'toh-hero',
-  plantilla: `...`
+@Component({
+  selector: 'toh-hero',
+  template: `...`
 })
 export class HeroComponent {
-  @Output () onSavedTheDay = new EventEmitter <boolean> ();
+  @Output() onSavedTheDay = new EventEmitter<boolean>();
 }
-app / app.component.html
-content_copy
-<! - evitar ->
+```
+>*Evitar*
+app/app.component.html
+```html
+<!-- avoid -->
 
-<toh-hero (onSavedTheDay) = "onSavedTheDay ($ event)"> </toh-hero>
-app / heroes / hero.component.ts
-app / app.component.html
-content_copy
-<toh-hero (savedTheDay) = "onSavedTheDay ($ event)"> </toh-hero>
-Volver arriba
+<toh-hero (onSavedTheDay)="onSavedTheDay($event)"></toh-hero>
+```
+>*En su lugar*
+app/heroes/hero.component.ts
+```javascript
+export class HeroComponent {
+  @Output() savedTheDay = new EventEmitter<boolean>();
+}
+```
 
-Poner lógica de presentación en la clase de componente
-Estilo 05-17
-Ponga la lógica de presentación en la clase de componente, y no en la plantilla.
+app/app.component.html
+```html
+<toh-hero (savedTheDay)="onSavedTheDay($event)"></toh-hero>
+```
 
-¿Por qué? La lógica estará contenida en un lugar (la clase de componente) en lugar de extenderse en dos lugares.
+### Poner lógica de presentación en la clase de componente
+#### Estilo 05-17
+**Do** Ponga la lógica de presentación en la clase de componente, y no en la plantilla.
 
-¿Por qué? Mantener la lógica de presentación del componente en la clase en lugar de la plantilla mejora la capacidad de prueba, la capacidad de mantenimiento y la reutilización.
+**¿Por qué?** La lógica estará contenida en un lugar (la clase de componente) en lugar de extenderse en dos lugares.
+
+**¿Por qué?** Mantener la lógica de presentación del componente en la clase en lugar de la plantilla mejora la capacidad de prueba, la capacidad de mantenimiento y la reutilización.
+
+>*Evitar*
 
 app / heroes / hero-list / hero-list.component.ts
-content_copy
-/ * evitar * /
+```javascript
+/* avoid */
 
-@Componente({
-  selector: 'toh-hero-list',
-  plantilla: `
-    <sección>
-      Nuestra lista de héroes:
-      <hero-profile * ngFor = "let hero of heroes" [hero] = "hero">
-      </hero-profile>
-      Potencias totales: {{totalPowers}} <br>
-      Poder promedio: {{totalPowers / heroes.length}}
-    </section>
-  ``
+@Component({
+  selector: 'toh-hero-list',
+  template: `
+    <section>
+      Our list of heroes:
+      <hero-profile *ngFor="let hero of heroes" [hero]="hero">
+      </hero-profile>
+      Total powers: {{totalPowers}}<br>
+      Average power: {{totalPowers / heroes.length}}
+    </section>
+  `
 })
 export class HeroListComponent {
-  héroes: Héroe [];
-  totalPowers: número;
+  heroes: Hero[];
+  totalPowers: number;
 }
-app / heroes / hero-list / hero-list.component.ts
-content_copy
-@Componente({
-  selector: 'toh-hero-list',
-  plantilla: `
-    <sección>
-      Nuestra lista de héroes:
-      <toh-hero * ngFor = "let hero of heroes" [hero] = "hero">
-      </toh-hero>
-      Potencias totales: {{totalPowers}} <br>
-      Potencia media: {{avgPower}}
-    </section>
-  ``
+```
+>*En su lugar*
+app/heroes/hero-list/hero-list.component.ts
+```javascript
+@Component({
+  selector: 'toh-hero-list',
+  template: `
+    <section>
+      Our list of heroes:
+      <toh-hero *ngFor="let hero of heroes" [hero]="hero">
+      </toh-hero>
+      Total powers: {{totalPowers}}<br>
+      Average power: {{avgPower}}
+    </section>
+  `
 })
 export class HeroListComponent {
-  héroes: Héroe [];
-  totalPowers: número;
+  heroes: Hero[];
+  totalPowers: number;
 
-  obtener avgPower () {
-    devuelve this.totalPowers / this.heroes.length;
-  }
+  get avgPower() {
+    return this.totalPowers / this.heroes.length;
+  }
 }
-Volver arriba
+```
 
-Directivas
-Usar directivas para mejorar un elemento
-Estilo 06-01
-Use directivas de atributos cuando tenga una lógica de presentación sin una plantilla.
+## Directivas
+### Usar directivas para mejorar un elemento
+#### Estilo 06-01
+**Do** Use directivas de atributos cuando tenga una lógica de presentación sin una plantilla.
 
-¿Por qué? Las directivas de atributos no tienen una plantilla asociada.
+**¿Por qué?** Las directivas de atributos no tienen una plantilla asociada.
 
-¿Por qué? Un elemento puede tener más de una directiva de atributo aplicada.
+**¿Por qué?** Un elemento puede tener más de una directiva de atributo aplicada.
 
-app / shared / highlight.directive.ts
-content_copy
-@Directiva({
-  selector: '[tohHighlight]'
+app/shared/highlight.directive.ts
+```javascript
+@Directive({
+  selector: '[tohHighlight]'
 })
-clase de exportación HighlightDirective {
-  @HostListener ('mouseover') onMouseEnter () {
-    // destaca el trabajo
-  }
+export class HighlightDirective {
+  @HostListener('mouseover') onMouseEnter() {
+    // do highlight work
+  }
 }
-app / app.component.html
-content_copy
-<div tohHighlight> Bombasta </div>
-Volver arriba
+```
+app/app.component.html
+```html
+<div tohHighlight>Bombasta</div>
+```
 
-Decoradores HostListener / HostBinding versus metadatos del host
-Estilo 06-03
-Considere preferir @HostListener y @HostBinding a la propiedad de host de @Di
+### HostListener/HostBinding decorators versus host metadata
+#### Estilo 06-03
+**Considere** preferir @HostListener y @HostBinding a la propiedad de host de @Di
 decoradores reactivos y @Component.
 
-Sea consistente en su elección.
+**Do** Sea consistente en su elección.
 
-¿Por qué? La propiedad asociada con @HostBinding o el método asociado con @HostListener solo se puede modificar en un solo lugar: en la clase de la directiva. Si utiliza la propiedad de metadatos del host, debe modificar tanto la declaración de propiedad / método en la clase de la directiva como los metadatos en el decorador asociado con la directiva.
+**¿Por qué?** La propiedad asociada con @HostBinding o el método asociado con @HostListener solo se puede modificar en un solo lugar: en la clase de la directiva. Si utiliza la propiedad de metadatos del host, debe modificar tanto la declaración de propiedad / método en la clase de la directiva como los metadatos en el decorador asociado con la directiva.
 
-app / shared / validator.directive.ts
-content_copy
-importar {Directiva, HostBinding, HostListener} desde '@ angular / core';
+app/shared/validator.directive.ts
+```javascript
+import { Directive, HostBinding, HostListener } from '@angular/core';
 
-@Directiva({
-  selector: '[tohValidator]'
+@Directive({
+  selector: '[tohValidator]'
 })
 export class ValidatorDirective {
-  @HostBinding ('attr.role') role = 'button';
-  @HostListener ('mouseenter') onMouseEnter () {
-    // hacer trabajo
-  }
+  @HostBinding('attr.role') role = 'button';
+  @HostListener('mouseenter') onMouseEnter() {
+    // do work
+  }
 }
+```
 Compare con la alternativa de metadatos de host menos preferida.
 
-¿Por qué? Los metadatos del host son solo un término para recordar y no requieren importaciones adicionales de ES.
+**¿Por qué?** Los metadatos del host son solo un término para recordar y no requieren importaciones adicionales de ES.
 
-app / shared / validator2.directive.ts
-content_copy
-importar {Directiva} desde '@ angular / core';
+app/shared/validator2.directive.ts
+```javascript
+import { Directive } from '@angular/core';
 
-@Directiva({
-  selector: '[tohValidator2]',
-  anfitrión: {
-    '[attr.role]': 'rol',
-    '(mouseenter)': 'onMouseEnter ()'
-  }
+@Directive({
+  selector: '[tohValidator2]',
+  host: {
+    '[attr.role]': 'role',
+    '(mouseenter)': 'onMouseEnter()'
+  }
 })
 export class Validator2Directive {
-  rol = 'botón';
-  onMouseEnter () {
-    // hacer trabajo
-  }
+  role = 'button';
+  onMouseEnter() {
+    // do work
+  }
 }
-Volver arriba
 
-Servicios
-Los servicios son singletons
-Estilo 07-01
-Utilice los servicios como singletons dentro del mismo inyector. Úselos para compartir datos y funcionalidad.
+```
 
-¿Por qué? Los servicios son ideales para compartir métodos en un área de características o una aplicación.
+## Servicios
+### Los servicios son singletons
+#### Estilo 07-01
+**Do** Utilice los servicios como singletons dentro del mismo inyector. Úselos para compartir datos y funcionalidad.
 
-¿Por qué? Los servicios son ideales para compartir datos en memoria con estado.
+**¿Por qué?** Los servicios son ideales para compartir métodos en un área de características o una aplicación.
 
-app / heroes / shared / hero.service.ts
-content_copy
+**¿Por qué?** Los servicios son ideales para compartir datos en memoria con estado.
+
+app/heroes/shared/hero.service.ts
+```javascript
 export class HeroService {
-  constructor (http privado: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getHeroes () {
-    devuelve this.http.get <Hero []> ('api / heroes');
-  }
+  getHeroes() {
+    return this.http.get<Hero[]>('api/heroes');
+  }
 }
-Volver arriba
+```
 
-Responsabilidad única
-Estilo 07-02
-Cree servicios con una única responsabilidad que esté encapsulada por su contexto.
+### Responsabilidad única
+#### Estilo 07-02
+**Do** Cree servicios con una única responsabilidad que esté encapsulada por su contexto.
 
-Cree un nuevo servicio una vez que el servicio comience a exceder ese propósito singular.
+**Do** Cree un nuevo servicio una vez que el servicio comience a exceder ese propósito singular.
 
-¿Por qué? Cuando un servicio tiene múltiples responsabilidades, se hace difícil probarlo.
+**¿Por qué?** Cuando un servicio tiene múltiples responsabilidades, se hace difícil probarlo.
 
-¿Por qué? Cuando un servicio tiene múltiples responsabilidades, cada componente o servicio que lo inyecta ahora tiene el peso de todos ellos.
+**¿Por qué?** Cuando un servicio tiene múltiples responsabilidades, cada componente o servicio que lo inyecta ahora tiene el peso de todos ellos.
 
-Volver arriba
+### Providing services
+#### Estilo 07-03
+**Do** Proporcione un servicio con el inyector raíz de la aplicación en el decorador @Injectable del servicio.
 
-Brindar un servicio
-Estilo 07-03
-Proporcione un servicio con el inyector raíz de la aplicación en el decorador @Injectable del servicio.
+**¿Por qué?** El inyector angular es jerárquico.
 
-¿Por qué? El inyector angular es jerárquico.
+**¿Por qué?** Cuando proporciona el servicio a un inyector raíz, esa instancia del servicio se comparte y está disponible en todas las clases que lo necesitan. Esto es ideal cuando un servicio comparte métodos o estados.
 
-¿Por qué? Cuando proporciona el servicio a un inyector raíz, esa instancia del servicio se comparte y está disponible en todas las clases que lo necesitan. Esto es ideal cuando un servicio comparte métodos o estados.
+**¿Por qué?** Cuando registra un servicio en el decorador @Injectable del servicio, las herramientas de optimización como las utilizadas por las compilaciones de producción de Angular CLI pueden realizar sacudidas de árboles y eliminar servicios que su aplicación no utiliza.
 
-¿Por qué? Cuando registra un servicio en el decorador @Injectable del servicio, las herramientas de optimización como las utilizadas por las compilaciones de producción de Angular CLI pueden realizar sacudidas de árboles y eliminar servicios que su aplicación no utiliza.
+**¿Por qué?** Esto no es ideal cuando dos componentes diferentes necesitan instancias diferentes de un servicio. En este escenario, sería mejor proporcionar el servicio en el nivel de componente que necesita la instancia nueva y separada.
 
-¿Por qué? Esto no es ideal cuando dos componentes diferentes necesitan instancias diferentes de un servicio. En este escenario, sería mejor proporcionar el servicio en el nivel de componente que necesita la instancia nueva y separada.
-
-src / app / treeshaking / service.ts
-content_copy
-@Inyectable ({
-  provideIn: 'root',
+src/app/treeshaking/service.ts
+```javascript
+@Injectable({
+  providedIn: 'root',
 })
-Servicio de clase de exportación {
+export class Service {
 }
-Volver arriba
+```
 
-Use el decorador de clase @Injectable ()
-Estilo 07-04
-Utilice el decorador de clase @Injectable () en lugar del decorador de parámetros @Inject cuando utilice tipos como tokens para las dependencias de un servicio.
+### Use el decorador de clase @Injectable ()
+#### Estilo 07-04
+**Do** Utilice el decorador de clase @Injectable () en lugar del decorador de parámetros @Inject cuando utilice tipos como tokens para las dependencias de un servicio.
 
-¿Por qué? El mecanismo de inyección de dependencia angular (DI) resuelve las dependencias propias de un servicio en función de los tipos declarados de los parámetros de constructor de ese servicio.
+**¿Por qué?** El mecanismo de inyección de dependencia angular (DI) resuelve las dependencias propias de un servicio en función de los tipos declarados de los parámetros de constructor de ese servicio.
 
-¿Por qué? Cuando un servicio acepta solo dependencias asociadas con tokens de tipo, la sintaxis @Injectable () es mucho menos detallada en comparación con el uso de @Inject () en cada parámetro de constructor individual.
+**¿Por qué?** Cuando un servicio acepta solo dependencias asociadas con tokens de tipo, la sintaxis @Injectable () es mucho menos detallada en comparación con el uso de @Inject () en cada parámetro de constructor individual.
 
-app / heroes / shared / hero-arena.service.ts
-content_copy
-/ * evitar * /
+>*Evitar
 
-clase de exportación HeroArena {
-  constructor(
-      @Inject (HeroService) heroService privado: HeroService,
-      @Inject (HttpClient) http privado: HttpClient) {}
+app/heroes/shared/hero-arena.service.ts
+```javascript
+/* avoid */
+
+export class HeroArena {
+  constructor(
+      @Inject(HeroService) private heroService: HeroService,
+      @Inject(HttpClient) private http: HttpClient) {}
 }
-app / heroes / shared / hero-arena.service.ts
-content_copy
-@Inyectable ()
-clase de exportación HeroArena {
-  constructor(
-    heroService privado: HeroService,
-    http privado: HttpClient) {}
+```
+>*En su lugar*
+app/heroes/shared/hero-arena.service.ts
+```javascript
+@Injectable()
+export class HeroArena {
+  constructor(
+    private heroService: HeroService,
+    private http: HttpClient) {}
 }
-Volver arriba
+```
 
-Servicios de datos
-Hable con el servidor a través de un servicio.
-Estilo 08-01
-Refactorice la lógica para realizar operaciones de datos e interactuar con datos a un servicio.
+## Servicios de datos
+### Hable con el servidor a través de un servicio.
+#### Estilo 08-01
+**Do** Refactorice la lógica para realizar operaciones de datos e interactuar con datos a un servicio.
 
-Haga que los servicios de datos sean responsables de las llamadas XHR, el almacenamiento local, el almacenamiento en la memoria o cualquier otra operación de datos.
+**Do** Haga que los servicios de datos sean responsables de las llamadas XHR, el almacenamiento local, el almacenamiento en la memoria o cualquier otra operación de datos.
 
-¿Por qué? La responsabilidad del componente es la presentación y recopilación de información para la vista. No debería importarle cómo obtiene los datos, solo que sabe a quién pedirlos. La separación de los servicios de datos mueve la lógica sobre cómo llevarlos al servicio de datos, y permite que el componente sea más simple y más centrado en la vista.
+**¿Por qué?** La responsabilidad del componente es la presentación y recopilación de información para la vista. No debería importarle cómo obtiene los datos, solo que sabe a quién pedirlos. La separación de los servicios de datos mueve la lógica sobre cómo llevarlos al servicio de datos, y permite que el componente sea más simple y más centrado en la vista.
 
-¿Por qué? Esto hace que sea más fácil probar (simulacro o real) las llamadas de datos al probar un componente que utiliza un servicio de datos.
+**¿Por qué?** Esto hace que sea más fácil probar (simulacro o real) las llamadas de datos al probar un componente que utiliza un servicio de datos.
 
-¿Por qué? Los detalles de la gestión de datos, como encabezados, métodos HTTP, almacenamiento en caché, manejo de errores y lógica de reintento, son irrelevantes para los componentes y otros consumidores de datos.
+**¿Por qué?** Los detalles de la gestión de datos, como encabezados, métodos HTTP, almacenamiento en caché, manejo de errores y lógica de reintento, son irrelevantes para los componentes y otros consumidores de datos.
 
 Un servicio de datos encapsula estos detalles. Es más fácil evolucionar estos detalles dentro del servicio consin afectar a sus consumidores. Y es más fácil probar a los consumidores con implementaciones de servicios simulados.
-
-Volver arriba
-
-Ganchos de ciclo de vida
-Use los ganchos de Lifecycle para aprovechar eventos importantes expuestos por Angular.
-
-Volver arriba
-
-Implementar interfaces de enlace de ciclo de vida
-Estilo 09-01
-Implemente las interfaces de enlace de ciclo de vida.
-
-¿Por qué? Las interfaces del ciclo de vida prescriben firmas de métodos mecanografiados. Use esas firmas para marcar errores de ortografía y sintaxis.
-
-app / heroes / shared / hero-button / hero-button.component.ts
-content_copy
-/ * evitar * /
-
-@Componente({
-  selector: 'toh-hero-button',
-  plantilla: `<botón> OK <botón>`
-})
-export class HeroButtonComponent {
-  onInit () {// mal escrito
-    console.log ('El componente se inicializa');
-  }
-}
-app / heroes / shared / hero-button / hero-button.component.ts
-content_copy
-@Componente({
-  selector: 'toh-hero-button',
-  plantilla: `<button> OK </button>`
-})
-export class HeroButtonComponent implementa OnInit {
-  ngOnInit () {
-    console.log ('El componente se inicializa');
-  }
-}
-Volver arriba
-
-Apéndice
-Herramientas y consejos útiles para Angular.
-
-Volver arriba
-
-Codelyzer
-Estilo A-01
-Use codelyzer para seguir esta guía.
-
-Considere ajustar las reglas en codelyzer para satisfacer sus necesidades.
-
-Volver arriba
-
-Plantillas de archivo y fragmentos
-Estilo A-02
-Utilice plantillas de archivo o fragmentos para ayudar a seguir estilos y patrones consistentes. Aquí hay plantillas y / o fragmentos para algunos de los editores de desarrollo web e IDE.
-
-Considere usar fragmentos para Visual Studio Code que sigan estos estilos y pautas.
-
-Usar extensión
-Considere usar fragmentos para Atom que sigan estos estilos y pautas.
-
-Considere usar fragmentos para Sublime Text que sigan estos estilos y pautas.
-
-Considere usar fragmentos para Vim que sigan estos estilos y pautas.
-
